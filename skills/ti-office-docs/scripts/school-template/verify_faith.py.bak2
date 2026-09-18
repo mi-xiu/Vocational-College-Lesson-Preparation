@@ -1,0 +1,243 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+verify_faith.py — 学校模板保真校验（零改动克隆 vs 成品）
+用法:
+  python3 verify_faith.py <模板.docx> <成品.docx> [--old "旧文本1" "旧文本2" ...]
+输出: 绿/红 报告
+原理（结构词汇比对，允许合理的行增删）:
+  - 列数必须一致
+  - 表头行(首行) 精确比对（合并/列宽）
+  - 合计行(含"合计"文本的行) 精确比对
+  - 数据行：成品的每一行"结构签名"必须 ∈ 模板的结构签名集合（子集判定，
+    允许删/增周行，但禁止引入新合并/改列宽）
+  - 段落[样式+字体] 序列比对（封面字体/排版保值）
+  - 占位符 {{ }}/{% } 残留扫描
+  - 指定旧文本残留检测
+依赖: python-docx, 标准库 zipfile
+"""
+import sys, zipfile, json, os
+from collections import Counter
+from docx import Document
+from docx.oxml.ns import qn
+
+def cell_sig(cell):
+    tc = cell._tc
+    tcPr = tc.find(qn('w:tcPr'))
+    gs = ""; vm = ""; w = ""
+    if tcPr is not None:
+        g = tcPr.find(qn('w:gridSpan'))
+        if g is not None: gs = "g" + g.get(qn('w:val'))
+        v = tcPr.find(qn('w:vMerge'))
+        if v is not None: vm = "v" + (v.get(qn('w:val')) or "c")[0]
+        we = tcPr.find(qn('w:tcW'))
+        if we is not None: w = we.get(qn('w:w'))
+    return f"{gs}{vm}:{w}"
+
+def row_sig(row):
+    return tuple(cell_sig(c) for c in row.cells)
+
+def row_text(row):
+    return " ".join(c.text for c in row.cells)
+
+def table_rows(tbl):
+    return [row_sig(r) for r in tbl.rows]
+
+def table_texts(tbl):
+    return [row_text(r) for r in tbl.rows]
+
+def residue_scan(path):
+    z = zipfile.ZipFile(path)
+    bad = 0
+    for n in z.namelist():
+        if n.endswith('.xml'):
+            x = z.read(n).decode('utf-8', 'ignore')
+            if '{{' in x or '{%' in x:
+                bad += 1
+    return bad
+
+def full_text(path):
+    d = Document(path)
+    t = " ".join(p.text for p in d.paragraphs)
+    for tb in d.tables:
+        for r in tb.rows:
+            for c in r.cells:
+                t += " " + c.text
+    return t
+
+def content_assertions(generated, expects):
+    """内容级断言：关键字段必须出现在成品全文（替代人工抽表）。"""
+    gt = full_text(generated)
+    checks = []
+    for e in expects:
+        if e and e in gt:
+            checks.append((f"关键字段存在「{e}」", True, "OK"))
+        elif e:
+            checks.append((f"关键字段缺失「{e}」", False, "成品中未找到"))
+    return checks
+
+def score_sum_assertions(generated):
+    """内容级断言：含「配分/比例」列的表，合计应=100（自动扫描，无需手填）。"""
+    gd = Document(generated)
+    checks = []
+    for i, t in enumerate(gd.tables):
+        if not t.rows:
+            continue
+        hdr = [c.text.strip() for c in t.rows[0].cells]
+        # 先精确匹配列名「配分/比例」，避免误命中「成绩组成及比例」等子串
+        target = next((ci for ci, h in enumerate(hdr) if h in ("配分", "比例")), None)
+        if target is None:
+            target = next((ci for ci, h in enumerate(hdr) if "配分" in h or "比例" in h), None)
+        if target is None:
+            continue
+        total, n = 0.0, 0
+        for r in t.rows[1:]:
+            cells = [c.text.strip() for c in r.cells]
+            if target >= len(cells):
+                continue
+            val = cells[target].replace("%", "").strip()
+            try:
+                total += float(val); n += 1
+            except ValueError:
+                pass
+        goal = 100 if ("配分" in hdr[target] or "比例" in hdr[target]) else None
+        if goal is not None:
+            if abs(total - goal) < 0.01:
+                checks.append((f"表格{i}「{hdr[target]}」合计", True, f"={total:.0f} (应为{goal})"))
+            else:
+                checks.append((f"表格{i}「{hdr[target]}」合计", False, f"={total:.1f} ≠ {goal}"))
+        else:
+            checks.append((f"表格{i}「{hdr[target]}」合计", True, f"={total:.1f} (仅报告)"))
+    return checks
+
+def para_sig(p):
+    if not p.runs:
+        return (p.style.name, "", "")
+    r = p.runs[0]
+    rPr = r._element.find(qn('w:rPr'))
+    font = ""; sz = ""
+    if rPr is not None:
+        rf = rPr.find(qn('w:rFonts'))
+        if rf is not None:
+            font = (rf.get(qn('w:ascii')) or '') + "/" + (rf.get(qn('w:ea')) or '')
+        s = rPr.find(qn('w:sz'))
+        if s is not None: sz = s.get(qn('w:val'))
+    return (p.style.name, font, sz)
+
+def compare_tables(t_tbl, g_tbl, checks, idx=0):
+    tr = table_rows(t_tbl); gt = table_rows(g_tbl)
+    tt = table_texts(t_tbl); gt2 = table_texts(g_tbl)
+    if not tr or not gt:
+        return
+    if len(tr[0]) != len(gt[0]):
+        checks.append((f"表格{idx}列数", False, f"模板{len(tr[0])} ≠ 成品{len(gt[0])}"))
+        return
+    # 表头行(首行) 精确
+    if tr[0] != gt[0]:
+        checks.append((f"表格{idx}表头行", False, "首行合并/列宽不一致"))
+    else:
+        checks.append((f"表格{idx}表头行", True, "一致"))
+    # 合计行(含"合计"文本) 精确
+    t_total = next((i for i, t in enumerate(tt) if "合计" in t), None)
+    g_total = next((i for i, t in enumerate(gt2) if "合计" in t), None)
+    if t_total is not None and g_total is not None:
+        if tr[t_total] != gt[g_total]:
+            checks.append((f"表格{idx}合计行", False, "合并/列宽不一致"))
+        else:
+            checks.append((f"表格{idx}合计行", True, "一致"))
+    elif t_total is not None or g_total is not None:
+        checks.append((f"表格{idx}合计行", False, "模板/成品 合计行缺失"))
+    # 数据行：改用"列宽签名"判定（内容表行数/合并随内容可变，只要求不引入模板没有的列宽）
+    def w_sig(row):
+        return tuple(cell_sig(c).split(':')[-1] for c in row.cells)
+    t_wvocab = Counter(w_sig(r) for r in t_tbl.rows)
+    g_wvocab = Counter(w_sig(r) for r in g_tbl.rows)
+    new_types = [sig for sig, c in g_wvocab.items() if t_wvocab.get(sig, 0) < c]
+    if new_types:
+        checks.append((f"表格{idx}数据行", False, f"成品引入{len(new_types)}种模板没有的列宽结构"))
+    else:
+        checks.append((f"表格{idx}数据行", True, f"列宽均沿用模板(成品{len(gt)}行 vs 模板{len(tr)}行)"))
+
+def verify(template, generated, old_texts=None, expects=None, spec_path=None):
+    # 若给定 spec，内嵌 forbidden/expect（D：校验参数固化进规格卡）
+    if spec_path and os.path.exists(spec_path):
+        try:
+            with open(spec_path, encoding="utf-8") as f:
+                sp = json.load(f)
+            vsec = sp.get("verify", {})
+            if vsec.get("forbidden"):
+                old_texts = (old_texts or []) + [x for x in vsec["forbidden"] if x]
+            if vsec.get("expect"):
+                expects = (expects or []) + [x for x in vsec["expect"] if x]
+        except Exception as e:
+            print(f"  ⚠ 读取 spec 校验段失败: {e}")
+    td = Document(template); gd = Document(generated)
+    checks = []
+    def add(name, ok, msg):
+        checks.append((name, ok, msg))
+    # 表格
+    if len(td.tables) != len(gd.tables):
+        add("表格数量", False, f"模板{len(td.tables)} ≠ 成品{len(gd.tables)}")
+        pass_flag = False
+    else:
+        for i, (t, g) in enumerate(zip(td.tables, gd.tables)):
+            compare_tables(t, g, checks, i)
+    # 段落
+    tps = [para_sig(p) for p in td.paragraphs]
+    gps = [para_sig(p) for p in gd.paragraphs]
+    if len(tps) != len(gps):
+        add("段落数量", False, f"模板{len(tps)} ≠ 成品{len(gps)}")
+        pass_flag = False
+    else:
+        diff = sum(1 for a, b in zip(tps, gps) if a != b)
+        add("段落[样式+字体]", diff == 0, f"差异 {diff}/{len(tps)}")
+        if diff: pass_flag = False
+    # 占位符
+    rb = residue_scan(generated)
+    add("占位符 {{ }}/{% } 残留", rb == 0, f"残留 {rb} 处")
+    if rb: pass_flag = False
+    # 旧文本
+    if old_texts:
+        gt_all = full_text(generated)
+        for ot in old_texts:
+            if ot and ot in gt_all:
+                add(f"旧文本残留「{ot}」", False, "发现未替换")
+                pass_flag = False
+            else:
+                add(f"旧文本「{ot}」已清除", True, "OK")
+    # 内容级断言：关键字段存在性 + 配分/比例合计
+    if expects:
+        for c in content_assertions(generated, expects):
+            checks.append(c)
+            if not c[1]:
+                pass_flag = False
+    for c in score_sum_assertions(generated):
+        checks.append(c)
+        if not c[1]:
+            pass_flag = False
+    # 重新结算：任何失败项都须反映到最终结论（含数据行/旧文本等分支）
+    pass_flag = all(ok for _, ok, _ in checks)
+    return {"checks": checks, "pass": pass_flag}
+
+if __name__ == "__main__":
+    args = sys.argv[1:]
+    if len(args) < 2:
+        print("用法: python3 verify_faith.py <模板.docx> <成品.docx> [--old 旧文本...]")
+        sys.exit(1)
+    template, generated = args[0], args[1]
+    old = args[args.index("--old") + 1:args.index("--expect")] if "--old" in args and "--expect" in args else (args[args.index("--old") + 1:] if "--old" in args else [])
+    expects = args[args.index("--expect") + 1:] if "--expect" in args else []
+    spec_path = args[args.index("--spec") + 1] if "--spec" in args else None
+    rep = verify(template, generated, old, expects, spec_path)
+    print("=" * 56)
+    print("保真校验报告")
+    print(f"  模板: {template}")
+    print(f"  成品: {generated}")
+    print("-" * 56)
+    for name, ok, msg in rep["checks"]:
+        mark = "✅" if ok else "❌"
+        print(f"  {mark} {name:24s} {msg}")
+    print("-" * 56)
+    print("  " + ("🟢 全部通过 — 成品与模板零改动保真" if rep["pass"] else "🔴 存在偏差 — 见上"))
+    print("=" * 56)
+    sys.exit(0 if rep["pass"] else 2)

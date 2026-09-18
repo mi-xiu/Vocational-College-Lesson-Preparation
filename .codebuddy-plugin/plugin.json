@@ -1,0 +1,248 @@
+{
+  "name": "gaozhi-course-team",
+  "version": "1.3.5",
+  "description": "（v1.3.5）Higher-vocational course development expert team: 11 agents (1 director + 10 members) across 3 phases — post research, competency map, course standard, course audit, overall design, unit design, lesson prep, template export, industry advisor — plus a teaching-platform router (Ti10) that routes deliverables to platform sub-skills (e.g. 智慧职教), orchestrated by a course director holding PGSD/岗课赛证 red lines. v1.3.5: knowledge/ 三份政策 PDF 全部转写 md 并去 PDF（纲要/1号文/从岗位到课堂），知识库纯 md 化；v1.3.4: Ti08 单元教案导出逻辑提升为技能级通用通道（课程无关）+ verify_faith 段落校验改为签名子集；默认三件套与规范化门/保真核对保持。",
+  "author": {
+    "name": "米修老师",
+    "email": "mixstudio@qq.com",
+    "wechat": "aietom"
+  },
+  "agents": [
+    "./agents/gaozhi-course-team-lead.md",
+    "./agents/post-research.md",
+    "./agents/competency-map.md",
+    "./agents/course-standard.md",
+    "./agents/course-audit.md",
+    "./agents/course-blueprint.md",
+    "./agents/unit-design.md",
+    "./agents/lesson-prep.md",
+    "./agents/office-docs.md",
+    "./agents/industry-advisor.md",
+    "./agents/ti10-teaching-platform.md"
+  ],
+  "skills": [
+    "./skills/ti-s01-s09-course-build",
+    "./skills/ti-s01-course-direction",
+    "./skills/ti-s02-task-resource",
+    "./skills/ti-s02-resource-collector",
+    "./skills/ti-s03-competency-map",
+    "./skills/ti-s04-course-standard",
+    "./skills/ti-s05-course-audit",
+    "./skills/ti-s06-course-blueprint",
+    "./skills/ti-s07-unit-design",
+    "./skills/ti-s08-teaching-plan",
+    "./skills/ti-s09-lesson-prep",
+    "./skills/ti-office-docs",
+    "./skills/ti-industry-advisor",
+    "./skills/Ti_图谱4智慧职教"
+  ],
+  "expertType": "team",
+  "agentName": "gaozhi-course-team-lead",
+  "teamInfo": {
+    "leadAgent": "gaozhi-course-team-lead",
+    "memberAgents": [
+      "post-research",
+      "competency-map",
+      "course-standard",
+      "course-audit",
+      "course-blueprint",
+      "unit-design",
+      "lesson-prep",
+      "office-docs",
+      "industry-advisor",
+      "ti10-teaching-platform"
+    ]
+  },
+  "displayName": {
+    "en": "Higher-Vocational Course Dev Team（v1.3.5·Platform）",
+    "zh": "高职课程开发专家团（v1.3.5·含教学平台）"
+  },
+  "profession": {
+    "en": "Higher-Vocational Course Dev Team（v1.3.5·Platform）",
+    "zh": "高职课程开发专家团（v1.3.5·含教学平台）"
+  },
+  "displayDescription": {
+    "en": "Higher-vocational course dev team v1.3.5: 11 specialists across the full PGSD/岗课赛证 workflow, plus a Ti10 teaching-platform router (智慧职教 etc.).",
+    "zh": "高职课程开发专家团 v1.3.5：11 位专家协作课程建设全流程，含 Ti10 教学平台路由。"
+  },
+  "avatar": "avatars/gaozhi-course-team-lead.png",
+  "categoryId": "09-OperationsHR",
+  "defaultInitPrompt": {
+    "zh": "按专家团三阶段流程，帮我从零建设一门高职课的完整交付物（课标/整体设计/单元/备课包）。",
+    "en": "Run the 3-phase team workflow to build a complete higher-vocational course package from scratch."
+  },
+  "plugin": "gaozhi-course-team",
+  "tags": [
+    {
+      "en": "Higher-Vocational Course Dev",
+      "zh": "高职课程建设"
+    },
+    {
+      "en": "Course Standard",
+      "zh": "课程标准"
+    },
+    {
+      "en": "Post-Course-Competition-Cert",
+      "zh": "岗课赛证融通"
+    }
+  ],
+  "quickPrompts": [
+    {
+      "en": "Build a full course package from scratch via the 3-phase team workflow.",
+      "zh": "按专家团三阶段流程，帮我从零建设一门高职课的完整交付物（课标/整体设计/单元/备课包）。"
+    },
+    {
+      "en": "I inherited an existing course — first run the course status audit (textbooks/students/hours/project sources/templates).",
+      "zh": "我接手了一门已开设课程，先帮我做课程现状梳理（教材/学情/课时/项目来源/模板）。"
+    },
+    {
+      "en": "This course will enter a competition — rebuild the standard and overall design on the post-course-competition-cert framework.",
+      "zh": "这门课要参赛，帮我按岗课赛证框架重做课标与整体设计。"
+    }
+  ],
+  "members": [
+    {
+      "id": "gaozhi-course-team-lead",
+      "displayName": {
+        "en": "Course Director",
+        "zh": "Ti00 课程总监"
+      },
+      "profession": {
+        "en": "Course Development Director",
+        "zh": "Ti00 课程总监"
+      },
+      "avatar": "avatars/gaozhi-course-team-lead.png",
+      "role": "lead"
+    },
+    {
+      "id": "post-research",
+      "displayName": {
+        "en": "Post Research Expert",
+        "zh": "Ti01 岗位调研专家"
+      },
+      "profession": {
+        "en": "Post & Employment Research Expert",
+        "zh": "Ti01 岗位调研专家"
+      },
+      "avatar": "avatars/post-research.png",
+      "role": "member"
+    },
+    {
+      "id": "competency-map",
+      "displayName": {
+        "en": "Competency Mapping Expert",
+        "zh": "Ti02 能力图谱专家"
+      },
+      "profession": {
+        "en": "Competency Mapping Expert",
+        "zh": "Ti02 能力图谱专家"
+      },
+      "avatar": "avatars/competency-map.png",
+      "role": "member"
+    },
+    {
+      "id": "course-standard",
+      "displayName": {
+        "en": "Course Standard Expert",
+        "zh": "Ti03 课程标准专家"
+      },
+      "profession": {
+        "en": "Course Standard Expert",
+        "zh": "Ti03 课程标准专家"
+      },
+      "avatar": "avatars/course-standard.png",
+      "role": "member"
+    },
+    {
+      "id": "course-audit",
+      "displayName": {
+        "en": "Course Status Audit Expert",
+        "zh": "Ti04 课程现状梳理专家"
+      },
+      "profession": {
+        "en": "Course Status Audit Expert",
+        "zh": "Ti04 课程现状梳理专家"
+      },
+      "avatar": "avatars/course-audit.png",
+      "role": "member"
+    },
+    {
+      "id": "course-blueprint",
+      "displayName": {
+        "en": "Overall Design Expert",
+        "zh": "Ti05 整体设计专家"
+      },
+      "profession": {
+        "en": "Overall Design Expert",
+        "zh": "Ti05 整体设计专家"
+      },
+      "avatar": "avatars/course-blueprint.png",
+      "role": "member"
+    },
+    {
+      "id": "unit-design",
+      "displayName": {
+        "en": "Unit Design Expert",
+        "zh": "Ti06 单元设计专家"
+      },
+      "profession": {
+        "en": "Unit Design Expert",
+        "zh": "Ti06 单元设计专家"
+      },
+      "avatar": "avatars/unit-design.png",
+      "role": "member"
+    },
+    {
+      "id": "lesson-prep",
+      "displayName": {
+        "en": "Lesson Prep Expert",
+        "zh": "Ti07 备课素材专家"
+      },
+      "profession": {
+        "en": "Lesson Prep & Resource Expert",
+        "zh": "Ti07 备课素材专家"
+      },
+      "avatar": "avatars/lesson-prep.png",
+      "role": "member"
+    },
+    {
+      "id": "office-docs",
+      "displayName": {
+        "en": "Template Export Expert（v1.3.4）",
+        "zh": "Ti08 模板导出专家（v1.3.4）"
+      },
+      "profession": {
+        "en": "Template Export Specialist（v1.3.4）",
+        "zh": "Ti08 模板导出专家（v1.3.4）"
+      },
+      "avatar": "avatars/office-docs.png",
+      "role": "member"
+    },
+    {
+      "id": "industry-advisor",
+      "displayName": {
+        "en": "Industry Advisor（v1.3.0）",
+        "zh": "Ti09 行业顾问（v1.3.0）"
+      },
+      "profession": {
+        "en": "Industry Knowledge Advisor（v1.3.0）",
+        "zh": "Ti09 行业顾问（v1.3.0）"
+      },
+      "avatar": "avatars/industry-advisor.png",
+      "role": "member"
+    },
+    {
+      "id": "ti10-teaching-platform",
+      "displayName": {
+        "en": "Teaching Platform Expert（v1.3.2）",
+        "zh": "Ti10 教学平台专家（v1.3.2）"
+      },
+      "profession": {
+        "en": "Teaching Platform Router Expert（v1.3.2）",
+        "zh": "Ti10 教学平台专家（v1.3.2）"
+      },
+      "avatar": "avatars/ti10-teaching-platform.png",
+      "role": "member"
+    }
+  ]
+}

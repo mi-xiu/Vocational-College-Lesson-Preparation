@@ -1,0 +1,49 @@
+{
+  "template": "单元教案-模板.docx",
+  "desc": "默认单元教案模板（西点装饰工艺版·纯段落）段落映射。索引取自 templates/单元教案-模板-spec.json，对当前模板文件稳定。本映射只描述模板级结构（哪段放什么字段），课程内容由调用方以 unit 字典提供，课程专属清扫替换由调用方以 sweep 列表提供——引擎不绑定任何课程。",
+  "rpr": {
+    "bold_idx": 29,
+    "norm_idx": 30,
+    "ppr_norm_idx": 30
+  },
+  "identity": {
+    "title_idx": 2,
+    "major_idx": 6,
+    "teacher1_idx": 8,
+    "date_idx": 19,
+    "project_idx": 21,
+    "course_idx": 23,
+    "grade_idx": 24,
+    "teacher2_idx": 25,
+    "hours_idx": 26,
+    "place_idx": 27
+  },
+  "sections": {
+    "overview_idx": 30,
+    "suzhi": [32, 33, 34],
+    "nengli": [36, 37, 38],
+    "zhishi": [40, 41, 42],
+    "zhongdian_head_idx": 43,
+    "zhongdian_head_text": "二、 教学重难点",
+    "zhongdian": [45, 46],
+    "nandian": [48, 49],
+    "prep_head_idx": 50,
+    "prep_head_text": "三、 教学准备",
+    "prep_t": [52, 53, 54],
+    "prep_s_idx": 56,
+    "process_header_idx": 57
+  },
+  "process_block": {
+    "anchor_idx": 57,
+    "end_marker": "五、"
+  },
+  "keyword_locate": {
+    "homework_p": "个人作业：",
+    "homework_g": "小组预习",
+    "eval_p": "过程性评价（",
+    "eval_r": "成果性评价（",
+    "reflect": "本讲信息量大",
+    "ext": ["书籍：", "纪录片：", "网站/杂志", "赛事："],
+    "assignment_after_heading": "作业"
+  }
+}

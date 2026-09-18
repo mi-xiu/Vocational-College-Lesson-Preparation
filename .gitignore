@@ -1,0 +1,40 @@
+# ========== 操作系统 ==========
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ========== Python ==========
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+env/
+
+# ========== Node（如引入 npm 依赖） ==========
+node_modules/
+
+# ========== 编辑器 / IDE ==========
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ========== 构建与临时产物 ==========
+dist/
+build/
+*.tmp
+*_backup/
+.bak/
+
+# ========== 本地密钥 / 环境 ==========
+.env
+*.secret
+*.local
+
+# ========== 日志 ==========
+*.log
+debug.log

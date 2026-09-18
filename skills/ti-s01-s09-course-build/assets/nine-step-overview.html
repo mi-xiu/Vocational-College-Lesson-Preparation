@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>备课步骤全景图（修订版 · 18 步）</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #eef2f7;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #1f2937;
+    padding: 32px 16px;
+  }
+  .infographic {
+    width: 760px;
+    max-width: 100%;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(30, 58, 138, 0.12);
+  }
+  .header {
+    background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
+    color: #fff;
+    padding: 34px 40px 30px;
+  }
+  .header .eyebrow {
+    font-size: 13px;
+    letter-spacing: 2px;
+    opacity: 0.85;
+    margin-bottom: 8px;
+  }
+  .header h1 { font-size: 27px; font-weight: 800; line-height: 1.25; }
+  .header p { margin-top: 10px; font-size: 14px; opacity: 0.92; }
+
+  /* 顺序铁律横幅 */
+  .rule {
+    background: #fef3c7;
+    border-top: 3px solid #f59e0b;
+    border-bottom: 3px solid #f59e0b;
+    padding: 16px 40px;
+    font-size: 14px;
+    color: #92400e;
+    line-height: 1.7;
+  }
+  .rule b { color: #b45309; }
+  .rule .arrow { color: #d97706; font-weight: 800; }
+  .rule .note { display:block; margin-top:6px; font-size:12.5px; color:#a16207; }
+
+  /* 阶段容器 */
+  .phase { padding: 24px 40px 4px; }
+  .phase-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .phase-num {
+    flex: 0 0 34px; height: 34px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .phase-title { font-size: 18px; font-weight: 800; }
+  .phase-sub { font-size: 12.5px; color: #64748b; margin-left: auto; font-weight: 600; }
+
+  /* 步骤卡 */
+  .step {
+    display: flex;
+    gap: 16px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .badge {
+    flex: 0 0 46px; height: 46px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 15px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-body { flex: 1; }
+  .step-body h3 { font-size: 16.5px; font-weight: 700; color: #0f172a; }
+  .step-body .desc { font-size: 13px; color: #475569; margin: 5px 0 9px; line-height: 1.6; }
+  .theory {
+    font-size: 11.5px; color: #0d9488; font-weight: 600; margin: 0 0 8px;
+  }
+  .theory b { color: #0f766e; }
+  .tool {
+    display: inline-block;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    border-radius: 999px;
+    padding: 3px 11px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 6px 6px 0;
+  }
+  /* 位置标记（在前/居中/在后） */
+  .pos {
+    position: absolute;
+    top: -10px; right: 14px;
+    background: #f59e0b;
+    color: #fff;
+    font-size: 11.5px; font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(245,158,11,0.4);
+  }
+  /* 职教核心标记 */
+  .vtag {
+    position: absolute;
+    top: -10px; right: 14px;
+    background: #dc2626;
+    color: #fff;
+    font-size: 11.5px; font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(220,38,38,0.4);
+  }
+  .step.highlight { border-color: #f59e0b; box-shadow: 0 0 0 2px rgba(245,158,11,0.18); }
+
+  /* 备课包子步 */
+  .substep { margin-left: 40px; border-style: dashed; background: #fafaff; }
+  .substep .badge { font-size: 13px; opacity: 0.9; }
+  /* 备课包子步分组标签（反向设计：证据先于教学） */
+  .subgroup {
+    margin: 14px 0 10px 40px;
+    font-size: 12.5px; font-weight: 700; color: #7c3aed;
+    border-left: 4px solid #7c3aed; padding-left: 10px;
+  }
+
+  /* 阶段配色 */
+  .c-blue    { background: #2563eb; }
+  .c-teal    { background: #0d9488; }
+  .c-purple  { background: #7c3aed; }
+  .c-orange  { background: #ea580c; }
+  .band-blue   { border-left: 5px solid #2563eb; }
+  .band-teal   { border-left: 5px solid #0d9488; }
+  .band-purple { border-left: 5px solid #7c3aed; }
+  .band-orange { border-left: 5px solid #ea580c; }
+
+  /* 三层文件纪律卡 */
+  .layers {
+    margin: 18px 40px 0;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 18px 20px;
+  }
+  .layers h3 { font-size: 15px; color: #0f172a; margin-bottom: 12px; }
+  .layer-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .layer-tag {
+    flex: 0 0 110px; text-align: center;
+    border-radius: 8px; padding: 6px 4px;
+    font-size: 12.5px; font-weight: 700; color: #fff;
+  }
+  .layer-desc { font-size: 12.5px; color: #475569; }
+
+  .footer {
+    padding: 22px 40px 30px;
+    margin-top: 18px;
+    font-size: 12.5px;
+    color: #64748b;
+    line-height: 1.7;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+  }
+  .footer .loop {
+    display: inline-block;
+    background: #fef3c7;
+    color: #92400e;
+    border-radius: 8px;
+    padding: 2px 8px;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+  <div class="infographic">
+
+    <div class="header">
+      <div class="eyebrow">WORKBUDDY · 高职课程建设</div>
+      <h1>备课步骤全景图（修订版 · 18 步）</h1>
+      <p>从职业分析到实施改进：技能触发顺序不可乱，一项独立工作 = 一步</p>
+    </div>
+
+    <div class="rule">
+      <b>⚠️ 顺序铁律：</b>先调研 <span class="arrow">→</span> 再标准 <span class="arrow">→</span> 后落地；
+      课标 <b>(S04)</b> 在前 · 整体设计 <b>(S06)</b> 居中 · 单元设计 <b>(S07)</b> 在后
+      <span class="note">※ 典型工作任务分析 S02 含案例/资源调研，在课标之前；案例台账不再单列，已并入 S02。备课包（S08）按反向设计(证据先于教学)展开为 10 个子步骤。</span>
+    </div>
+
+    <!-- ① 职业分析与任务提炼 -->
+    <div class="phase band-blue">
+      <div class="phase-head">
+        <div class="phase-num c-blue">①</div>
+        <div class="phase-title">职业分析与任务提炼</div>
+        <div class="phase-sub">定调 · 3 步</div>
+      </div>
+
+      <div class="step">
+        <div class="badge c-blue">S01</div>
+        <div class="step-body">
+          <h3>职业 / 工作过程分析</h3>
+          <div class="desc">摸清岗位、就业面向、区域产业需求与职业工作过程，给课程定调。</div>
+          <div class="theory">理论名词：<b>DACUM 职业分析 · 工作过程</b></div>
+          <span class="tool">ti-s01-s09-course-build</span>
+          <span class="tool">ti-s01-course-direction</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="badge c-blue">S02</div>
+        <div class="step-body">
+          <h3>典型工作任务分析（含案例/资源调研）</h3>
+          <div class="desc">EXWOWO 提炼典型任务，同时完成案例/素材调研（合并原"案例台账"）。这是后续"目标"的源头。</div>
+          <div class="theory">理论名词：<b>BAG 典型工作任务 · EXWOWO</b></div>
+          <span class="tool">ti-s03-competency-map</span>
+          <span class="tool">ti-s02-resource-collector</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="badge c-blue">S03</div>
+        <div class="step-body">
+          <h3>能力图谱（PGSD 拆解）</h3>
+          <div class="desc">由典型任务反推 P/G/S/D 四维能力标准，形成能力骨架。</div>
+          <div class="theory">理论名词：<b>PGSD · 行动能力 · 核心素养</b></div>
+          <span class="tool">ti-s03-competency-map</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ② 课程设计 -->
+    <div class="phase band-teal">
+      <div class="phase-head">
+        <div class="phase-num c-teal">②</div>
+        <div class="phase-title">课程设计</div>
+        <div class="phase-sub">立标 · 1 步</div>
+      </div>
+
+      <div class="step highlight">
+        <div class="pos">在前</div>
+        <div class="badge c-teal">S04</div>
+        <div class="step-body">
+          <h3>课程标准（能力标准母本）</h3>
+          <div class="desc">输出《课程标准》：定位、就业面向、能力目标、岗课赛证映射、课程评价标准。不绑项目/周次。反向设计"先定目标"在此落定。</div>
+          <div class="theory">理论名词：<b>学习领域(Lernfeld) · OBE · 泰勒原理 · 反向设计</b></div>
+          <span class="tool">ti-s04-course-standard</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ③ 教学开发 -->
+    <div class="phase band-purple">
+      <div class="phase-head">
+        <div class="phase-num c-purple">③</div>
+        <div class="phase-title">教学开发</div>
+        <div class="phase-sub">产出 · 4 步（含 10 子步）</div>
+      </div>
+
+      <div class="step">
+        <div class="badge c-purple">S05</div>
+        <div class="step-body">
+          <h3>学生画像 / 学情分析</h3>
+          <div class="desc">分析学情起点、认知规律，为难度阶梯与教学策略打底（在整体设计之前）。</div>
+          <div class="theory">理论名词：<b>学习者特征分析 · 最近发展区 · 差异化教学</b></div>
+          <span class="tool">ti-s01-s09-course-build</span>
+        </div>
+      </div>
+
+      <div class="step highlight">
+        <div class="pos">居中</div>
+        <div class="badge c-purple">S06</div>
+        <div class="step-body">
+          <h3>整体设计（项目化落地 · 含 14 周进程）</h3>
+          <div class="desc">输出《课程整体设计》：真实项目载体、作品链、周次进程、模块×作品矩阵。绑项目/周次。目标的"项目载体"在此落定。</div>
+          <div class="theory">理论名词：<b>学习情境框架 · 行动导向 · PBL</b></div>
+          <span class="tool">ti-s06-course-blueprint</span>
+        </div>
+      </div>
+
+      <div class="step highlight">
+        <div class="pos">在后</div>
+        <div class="badge c-purple">S07</div>
+        <div class="step-body">
+          <h3>单元设计（周单元教案 + 评价量规）</h3>
+          <div class="desc">以整体设计的项目/任务/周次为骨架，输出 BOtPPPS 周单元完整教案（含量规）。目标的"周任务+评估"在此落定。</div>
+          <div class="theory">理论名词：<b>学习情境 · BOPPPS · 梅里尔首要原理</b></div>
+          <span class="tool">ti-s07-unit-design</span>
+        </div>
+      </div>
+
+      <div class="step highlight">
+        <div class="badge c-purple">S08</div>
+        <div class="step-body">
+          <h3>备课包（教学材料容器）</h3>
+          <div class="desc">汇总可上课的材料包，按<b>反向设计(证据先于教学)</b>排布 <b>10 个</b>子步骤（见下方缩进卡）。</div>
+          <div class="theory">理论名词：<b>教学材料包 · BAG 工作页 · 理实一体化</b></div>
+          <span class="tool">多技能组合</span>
+        </div>
+      </div>
+
+      <!-- 备课包 10 子步（反向设计：证据先于教学） -->
+      <div class="subgroup">▍评估证据（反向设计 · 先定）：要学生完成什么 + 怎么证明他做到</div>
+      <div class="step substep">
+        <div class="vtag">职教核心</div>
+        <div class="badge c-purple">S08-1</div>
+        <div class="step-body">
+          <h3>任务工单 / 工作页 / 实训指导书</h3>
+          <div class="desc">学生"练"的载体，也是反向设计的"评估证据"——BAG 学习情境学生侧核心交付物，与教案平行（原 5 步最大缺口）。</div>
+          <div class="theory">理论名词：<b>BAG 工作页(Arbeitsblatt) · 行动导向 · 理实一体化</b></div>
+          <span class="tool">ti-s07-unit-design(工作页)</span>
+        </div>
+      </div>
+      <div class="step substep">
+        <div class="badge c-purple">S08-2</div>
+        <div class="step-body">
+          <h3>考题</h3>
+          <div class="desc">依课标评价标准与单元量规出测验/考核题（反向设计阶段二：评价证据先于教学活动）。</div>
+          <div class="theory">理论名词：<b>评价开发 · 布鲁姆目标分类 · 形成性评价</b></div>
+          <span class="tool">generating-evaluation-rubrics</span>
+        </div>
+      </div>
+      <div class="step substep">
+        <div class="badge c-purple">S08-3</div>
+        <div class="step-body">
+          <h3>评价量规 / 评分表</h3>
+          <div class="desc">把 S07 的评价框架落成"可直接发学生的评分表/互评表/过程记录表"。</div>
+          <div class="theory">理论名词：<b>表现性评价 · 量规设计(Rubric)</b></div>
+          <span class="tool">generating-evaluation-rubrics</span>
+        </div>
+      </div>
+
+      <div class="subgroup">▍教学活动（反向设计 · 后设）：帮学生抵达目标</div>
+      <div class="step substep">
+        <div class="badge c-purple">S08-4</div>
+        <div class="step-body">
+          <h3>教材 / 学材</h3>
+          <div class="desc">整理给学生看的文本材料（从"讲稿"拆出，受众不同）。</div>
+          <div class="theory">理论名词：<b>教材编写 · 学材设计</b></div>
+          <span class="tool">minimax-docx</span>
+        </div>
+      </div>
+      <div class="step substep">
+        <div class="badge c-purple">S08-5</div>
+        <div class="step-body">
+          <h3>讲稿</h3>
+          <div class="desc">把单元环节转成逐字/提纲讲稿（教师"说"的脚本，排在证据之后）。</div>
+          <div class="theory">理论名词：<b>教学材料开发</b></div>
+          <span class="tool">ti-s07-unit-design / minimax-docx</span>
+        </div>
+      </div>
+      <div class="step substep">
+        <div class="badge c-purple">S08-6</div>
+        <div class="step-body">
+          <h3>PPT</h3>
+          <div class="desc">把讲稿可视化成课堂课件（教师"示"）。</div>
+          <div class="theory">理论名词：<b>多媒体学习认知理论(CRT) · 课件设计</b></div>
+          <span class="tool">html-ppt / pptx-generator / tencent-pptx</span>
+        </div>
+      </div>
+      <div class="step substep">
+        <div class="badge c-purple">S08-7</div>
+        <div class="step-body">
+          <h3>动画 / 重难点可视化</h3>
+          <div class="desc">针对抽象难点做短动画/演示。</div>
+          <div class="theory">理论名词：<b>双重编码 · 可视化学习</b></div>
+          <span class="tool">3D模型与视频特效 / 视频生成</span>
+        </div>
+      </div>
+      <div class="step substep">
+        <div class="badge c-purple">S08-8</div>
+        <div class="step-body">
+          <h3>微课</h3>
+          <div class="desc">把知识点做成 5–10 分钟短视频，供翻转课堂/碎片化学习（学生"学"·异步）。</div>
+          <div class="theory">理论名词：<b>微课理论 · 微学习 · 翻转课堂</b></div>
+          <span class="tool">视频生成 / 微课制作</span>
+        </div>
+      </div>
+
+      <div class="subgroup">▍保障与差异化</div>
+      <div class="step substep">
+        <div class="vtag">职教核心</div>
+        <div class="badge c-purple">S08-9</div>
+        <div class="step-body">
+          <h3>设备 / 耗材 / 安全清单</h3>
+          <div class="desc">理实一体课的开课前提——场地、设备、耗材、软件环境与安全规程（原 5 步缺失的实训保障）。</div>
+          <div class="theory">理论名词：<b>实训保障 · 安全管理 · 理实一体化条件</b></div>
+          <span class="tool">实训准备清单</span>
+        </div>
+      </div>
+      <div class="step substep">
+        <div class="badge c-purple">S08-10</div>
+        <div class="step-body">
+          <h3>拓展 / 分层资源</h3>
+          <div class="desc">呼应 S05 学生画像的差异化教学——给吃不饱/跟不上的学生各自的拓展与补救资源。</div>
+          <div class="theory">理论名词：<b>差异化教学 · 最近发展区(ZPD)</b></div>
+          <span class="tool">分层素材</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ④ 实施改进 -->
+    <div class="phase band-orange">
+      <div class="phase-head">
+        <div class="phase-num c-orange">④</div>
+        <div class="phase-title">实施与改进</div>
+        <div class="phase-sub">闭环 · 1 步</div>
+      </div>
+
+      <div class="step">
+        <div class="badge c-orange">S09</div>
+        <div class="step-body">
+          <h3>教学实施与评价改进</h3>
+          <div class="desc">把备课包拿到课堂实施，收集评价反馈，回流修订课标/整体设计，形成持续改进闭环。</div>
+          <div class="theory">理论名词：<b>ADDIE 的 I+E · PDCA · 反思性实践</b></div>
+          <span class="tool">复盘 / 修订（回到 S04 / S06）</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 三层文件纪律 -->
+    <div class="layers">
+      <h3>📐 三层文件纪律（顺序铁律的落地产物）</h3>
+      <div class="layer-row">
+        <div class="layer-tag c-teal">课程标准<br>S04</div>
+        <div class="layer-desc">能力标准母本——回答「培养什么能力」，不绑项目/周次。一切下游的依据。</div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-tag c-purple">整体设计<br>S06</div>
+        <div class="layer-desc">项目化落地方案——回答「怎么教」，绑真实项目/作品/周次。承上启下居中。</div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-tag" style="background:#db2777;">单元设计<br>S07</div>
+        <div class="layer-desc">周单元教案——以整体设计骨架生成具体教案，排在最末、最贴近课堂。</div>
+      </div>
+    </div>
+
+    <!-- 目标纵向一致性 -->
+    <div class="layers" style="border-color:#c7d2fe;">
+      <h3>🎯 目标纵向一致性：同一职业源头，不同抽象层</h3>
+      <div class="layer-row">
+        <div class="layer-tag c-blue">典型任务<br>S02</div>
+        <div class="layer-desc">职业真实任务原貌（"这行到底要干啥"）——目标源头。</div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-tag c-teal">课标能力<br>S04</div>
+        <div class="layer-desc">抽象为 PGSD 四维能力点（"学生该具备什么能力"）——反向设计先定目标。</div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-tag c-purple">整体/单元<br>S06/S07</div>
+        <div class="layer-desc">翻译成教学项目与周任务+量规（"这一周具体做啥、怎么评"）——目标已有载体。</div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-tag c-orange">备课包考题<br>S08</div>
+        <div class="layer-desc">把周任务 operationalize 成可考核证据（任务工单/考题）。<b>不是新目标，是最后一层形态。</b></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span class="loop">闭环</span> 每完成一步，产物沉淀为工作区记忆，下一门课可直接复用模板与能力图谱。<br>
+      修订版 18 步：案例台账已并入 S02；备课包（S08）按<b>反向设计</b>排布 10 子步——评估证据（任务工单 S08-1 / 考题 S08-2 / 量规 S08-3）先于教学活动（学材 S08-4 / 讲稿 S08-5 / PPT S08-6 / 动画 S08-7 / 微课 S08-8）。<br>
+      数据来源：本项目已装技能 ti-s01-s09-course-build、ti-s01-course-direction、ti-s03-competency-map、ti-s04-course-standard、ti-s06-course-blueprint、ti-s07-unit-design、ti-s02-resource-collector。<br>
+      本图为版式骨架，精修配色 / 商业素材请在 Canva / 创客贴 完成。
+    </div>
+
+  </div>
+</body>
+</html>

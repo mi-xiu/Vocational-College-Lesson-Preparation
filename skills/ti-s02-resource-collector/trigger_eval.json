@@ -1,0 +1,22 @@
+[
+  {"query": "帮我收集 K02_01 短视频运镜技巧的教学资源，整理成一份资源清单", "should_trigger": true},
+  {"query": "我们某专业课程课要建素材库，去网上找点运镜、构图的教程和案例", "should_trigger": true},
+  {"query": "帮我把项目盘里现有的微课、文档按能力点归类一下", "should_trigger": true},
+  {"query": "对照课程标准的能力图谱，看看哪个能力点还缺教学资源", "should_trigger": true},
+  {"query": "我要给单元设计准备素材，搜集一些灯光布光的教学视频和文章", "should_trigger": true},
+  {"query": "找一下 B站和公众号上关于手机拍摄设备操作的干货", "should_trigger": true},
+  {"query": "课程资源缺口分析：后期剪辑和声音设计这块资源够不够", "should_trigger": true},
+  {"query": "帮我把这些散落的资料整理成一份课程资源清单", "should_trigger": true},
+  {"query": "收集一些某专业课程的配乐素材和剪辑工具推荐", "should_trigger": true},
+  {"query": "智慧课程建设需要补充哪些教学资源，帮我捋一捋", "should_trigger": true},
+  {"query": "帮我把这份 Word 教案排版美化一下", "should_trigger": false},
+  {"query": "下载这个教学视频到本地就行", "should_trigger": false},
+  {"query": "用 Python 写个爬虫把竞品网站全抓下来", "should_trigger": false},
+  {"query": "帮我生成一份某专业课程课程的 PPT 课件", "should_trigger": false},
+  {"query": "翻译这篇英文剪辑教程", "should_trigger": false},
+  {"query": "把这段视频剪辑成 1 分钟预告片", "should_trigger": false},
+  {"query": "我电脑里照片太多了帮我清理删掉", "should_trigger": false},
+  {"query": "写一首关于校园生活的歌词", "should_trigger": false},
+  {"query": "查一下 Adobe Premiere 的最新版本号", "should_trigger": false},
+  {"query": "帮我写一个产品拍摄脚本", "should_trigger": false}
+]
