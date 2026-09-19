@@ -6,7 +6,7 @@
 
 [![Version](https://img.shields.io/badge/version-1.3.5-blue.svg)](./版本号管理办法.md)
 [![Type](https://img.shields.io/badge/type-Team--Expert-green.svg)](./.codebuddy-plugin/plugin.json)
-[![License](https://img.shields.io/badge/license-CC--BY--NC--4.0-lightgrey.svg)](#许可证)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](#许可证)
 [![Members](https://img.shields.io/badge/members-11%20agents-orange.svg)](./.codebuddy-plugin/plugin.json)
 
 ---
@@ -76,7 +76,7 @@ gaozhi-course-team/
 ├── .codebuddy-plugin/
 │   └── plugin.json              # 团队包元数据（name/version/members/displayName…）
 ├── README.md                    # 本说明（GitHub 主页）
-├── LICENSE                      # CC BY-NC 4.0 许可证全文
+├── LICENSE                      # MIT 许可证全文
 ├── .gitignore                   # Git 忽略规则（OS / Python / Node / 构建产物）
 ├── CONTRIBUTING.md              # 贡献与二次开发指南
 ├── 专家团使用说明.md            # 完整使用手册（安装/调用/工作流/红线/注意事项）
@@ -151,9 +151,9 @@ Copy-Item -Recurse gaohi-course-team "$env:USERPROFILE\.workbuddy\plugins\market
 
 ## 许可证
 
-本专家团以 **CC BY-NC 4.0（署名-非商业性使用）** 发布：可自由学习、二次开发、在教研场景内部使用，但**不得用于商业售卖或闭源封装**；二次发布请保留作者署名（米修老师）与版本号。
+本专家团以 **MIT License** 发布：可自由使用、复制、修改、合并、出版、分发、再许可与销售，包括商用与闭源二次分发，**唯一条件是保留本许可证全文与作者署名**（米修老师）。
 
-> 如需其他授权（如商业授权、纳入机构私有分发），请联系作者 mixstudio@qq.com。
+> 软件按「原样」提供，作者不承担任何明示或暗示的担保责任。如需定制开发或商业合作，请联系 mixstudio@qq.com。
 
 ## 二次开发
 
