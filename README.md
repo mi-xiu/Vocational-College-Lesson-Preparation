@@ -153,7 +153,9 @@ Copy-Item -Recurse gaozhi-course-team "$env:USERPROFILE\.workbuddy\plugins\marke
 
 ### 方式 B · 离线 `.wbp` 安装（普通用户）
 
-从 GitHub Releases 下载随版发布的 `高职课程开发专家团_v1.3.6.wbp`（或 `.zip`），双击即可离线安装整团（Mac/Windows 通用，无需联网/账号）。团队包已内嵌全部 11 位专家副本，无需逐个安装。
+从 GitHub Releases 下载随版发布的 `gaozhi-course-team-v1.3.6.wbp`（或 `.zip`），双击即可离线安装整团（Mac/Windows 通用，无需联网/账号）。团队包已内嵌全部 11 位专家副本，无需逐个安装。
+
+> 说明：GitHub Release **资产名不支持中文**，故线上资产用 ASCII 名 `gaozhi-course-team-v1.3.6.zip` / `.wbp`；本地同名中文文件 `高职课程开发专家团_v1.3.6.zip` 与之字节级一致，二者是同一个包。
 
 ### 调用
 
