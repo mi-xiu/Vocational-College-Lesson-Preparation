@@ -11,12 +11,12 @@
 
 ---
 
-> **版本 v1.4.0** ｜ 类型：Team 型多角色协作专家团队 ｜ 作者：米修老师（mixstudio@qq.com）
+> **版本 v1.5.0** ｜ 类型：Team 型多角色协作专家团队 ｜ 作者：米修老师（mixstudio@qq.com）
 > 适用平台：WorkBuddy 桌面版（专家注册于 `my-experts` marketplace）
 > 适用范围：中职 / 高职专科 / 职业本科 · 全专业大类通用
 > 配套文档：`USAGE.md`（完整使用手册）、`VERSIONING.md`（发版纪律）
 
-[![Version](https://img.shields.io/badge/version-1.4.0-blue.svg)](./VERSIONING.md)
+[![Version](https://img.shields.io/badge/version-1.5.0-blue.svg)](./VERSIONING.md)
 [![Type](https://img.shields.io/badge/type-Team--Expert-green.svg)](./.codebuddy-plugin/plugin.json)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#许可证)
 [![Members](https://img.shields.io/badge/members-11%20agents-orange.svg)](./.codebuddy-plugin/plugin.json)
@@ -149,13 +149,13 @@ cp -r vocational-college-lesson-preparation ~/.workbuddy/plugins/marketplaces/my
 Copy-Item -Recurse vocational-college-lesson-preparation "$env:USERPROFILE\.workbuddy\plugins\marketplaces\my-experts\plugins\"
 ```
 
-放入后重启 WorkBuddy，在「专家」入口即可看到 **职教课程开发专家团（v1.4.0·全专业通用·含教学平台）**。
+放入后重启 WorkBuddy，在「专家」入口即可看到 **职教课程开发专家团（v1.5.0·全专业通用·含教学平台）**。
 
 ### 方式 B · 离线 `.wbp` 安装（普通用户）
 
-从 GitHub Releases 下载随版发布的 `vocational-college-lesson-preparation-v1.4.0.wbp`（或 `.zip`），双击即可离线安装整团（Mac/Windows 通用，无需联网/账号）。团队包已内嵌全部 11 位专家副本，无需逐个安装。
+从 GitHub Releases 下载随版发布的 `vocational-college-lesson-preparation-v1.5.0.wbp`（或 `.zip`），双击即可离线安装整团（Mac/Windows 通用，无需联网/账号）。团队包已内嵌全部 11 位专家副本，无需逐个安装。
 
-> 说明：GitHub Release **资产名不支持中文**，故线上资产用 ASCII 名 `vocational-college-lesson-preparation-v1.4.0.zip` / `.wbp`；本地同名中文文件 `职教课程开发专家团_v1.4.0.zip` 与之字节级一致，二者是同一个包。
+> 说明：GitHub Release **资产名不支持中文**，故线上资产用 ASCII 名 `vocational-college-lesson-preparation-v1.5.0.zip` / `.wbp`；本地同名中文文件 `职教课程开发专家团_v1.5.0.zip` 与之字节级一致，二者是同一个包。
 
 ### 调用
 
@@ -193,6 +193,7 @@ Copy-Item -Recurse vocational-college-lesson-preparation "$env:USERPROFILE\.work
 
 ### Changelog
 
+- **v1.5.0（2026-09-19）**：**11 位成员头像按人格测试（MBTI）统一重制**——原头像为混搭风格（10 张 3D 低多边形 + 1 张写实照片）且与人格类型无视觉关联，本次全部重制为统一的 3D 低多边形风（512×512、纯人像无水印无边框），并按 **16personalities 族群配色**分区：分析家 NT=紫（lead / competency-map / course-blueprint）、外交家 NF=绿（industry-advisor）、守护者 SJ=蓝（post-research / course-standard / unit-design / office-docs）、探索者 SP=黄（course-audit / lesson-prep / ti10）。红线第六条**补齐 Ti08=ESFJ / Ti09=ENFJ / Ti10=ESFP** 三位成员的 MBTI 映射；修复 `ti10-teaching-platform.png` 与 lead 头像**共用同一张图**（md5 相同）的重复缺陷。按「全体发版」判级 **Y+1**。
 - **v1.4.0（2026-09-19）**：**品牌与标识统一更名**——中文名「高职课程开发专家团」→「**职教课程开发专家团**」，插件 ID / 目录名 `gaozhi-course-team` → `vocational-college-lesson-preparation`（与 GitHub 仓库同名，全小写 + 连字符），lead agent 与头像同步改名；**仓库内文件名全量 ASCII 化**（`knowledge/` 政策文件、`templates/` 三件套与 L0–L3 模板、单元教案/课程标准/授课计划模板、根目录 `USAGE.md` / `SHARING.md` / `VERSIONING.md`、技能目录 `ti-zhihui-zhijiao-graph`），发布资产不再因中文名被 GitHub 剔字；正文「高职」按语义区分：品牌义改「职教」，层次义（高职专科 / 中职 / 高职院校）保留。团队能力未变，本次为**标识与命名层修订**，按「全体发版」判级 Y+1。
 - **v1.3.6（2026-09-19）**：**明确通用定位**——README 顶部写明「适用于所有面向职业岗位的课程开发（中职 / 高职专科 / 职业本科 · 全专业大类）」，并给出通用机制「换专业不改团队只换 industry-libs，换学校不改团队只换模板」；新增「适用对象」表与「通用性三层解耦」表（方法论层不变 / 行业知识层可插拔 / 文档格式层以学校模板为真源）；补充启动参数表与「扩展到其他专业」步骤；`plugin.json` 四字段、默认提示语同步通用化。团队能力未变，为**定位与文档层修订**。
 - **v1.3.5（2026-09-19）**：知识库纯 md 化——`knowledge/` 三份政策 PDF（纲要 / 1号文 / 从岗位到课堂）全部转写为 md 并移除原件，日常检索/引用统一走 md，无二进制依赖；`README.md` 更新时间同步。
