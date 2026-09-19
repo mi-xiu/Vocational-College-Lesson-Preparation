@@ -1,11 +1,22 @@
 # 高职课程开发专家团 · gaozhi-course-team
 
-> **版本 v1.3.5** ｜ 类型：Team 型多角色协作专家团队 ｜ 作者：米修老师（mixstudio@qq.com）
+## 适用于所有面向职业岗位的课程开发
+
+**与专业无关、与课程无关** —— 本团适用于**所有面向职业岗位的课程开发**：中等职业教育 · 高职专科 · 职业本科，覆盖装备制造、电子信息、财经商贸、医药卫生、文化艺术、交通运输、教育与体育、农林牧渔、旅游、公共管理与服务等**全部专业大类**。无论你教的是《微电影编导》还是《数控加工工艺》，团队走的是同一条链路。
+
+通用的机制只有两句话：
+
+> **换专业不改团队，只换行业库** —— `knowledge/行业库/` 可插拔（默认 `film`），换专业只需建一份该专业的行业库
+> **换学校不改团队，只换模板** —— 以你学校的模板为唯一格式真源，格式零改动、只替换内容
+
+---
+
+> **版本 v1.3.6** ｜ 类型：Team 型多角色协作专家团队 ｜ 作者：米修老师（mixstudio@qq.com）
 > 适用平台：WorkBuddy 桌面版（专家注册于 `my-experts` marketplace）
-> **适用范围：中职 / 高职专科 / 职业本科，全专业大类通用**（换专业只换行业库，换学校只换模板）
+> 适用范围：中职 / 高职专科 / 职业本科 · 全专业大类通用
 > 配套文档：`专家团使用说明.md`（完整使用手册）、`版本号管理办法.md`（发版纪律）
 
-[![Version](https://img.shields.io/badge/version-1.3.5-blue.svg)](./版本号管理办法.md)
+[![Version](https://img.shields.io/badge/version-1.3.6-blue.svg)](./版本号管理办法.md)
 [![Type](https://img.shields.io/badge/type-Team--Expert-green.svg)](./.codebuddy-plugin/plugin.json)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](#许可证)
 [![Members](https://img.shields.io/badge/members-11%20agents-orange.svg)](./.codebuddy-plugin/plugin.json)
@@ -138,11 +149,11 @@ cp -r gaozhi-course-team ~/.workbuddy/plugins/marketplaces/my-experts/plugins/
 Copy-Item -Recurse gaozhi-course-team "$env:USERPROFILE\.workbuddy\plugins\marketplaces\my-experts\plugins\"
 ```
 
-放入后重启 WorkBuddy，在「专家」入口即可看到 **高职课程开发专家团（v1.3.5·含教学平台）**。
+放入后重启 WorkBuddy，在「专家」入口即可看到 **高职课程开发专家团（v1.3.6·全专业通用·含教学平台）**。
 
 ### 方式 B · 离线 `.wbp` 安装（普通用户）
 
-从 GitHub Releases 下载随版发布的 `高职课程开发专家团_v1.3.5.wbp`（或 `.zip`），双击即可离线安装整团（Mac/Windows 通用，无需联网/账号）。团队包已内嵌全部 11 位专家副本，无需逐个安装。
+从 GitHub Releases 下载随版发布的 `高职课程开发专家团_v1.3.6.wbp`（或 `.zip`），双击即可离线安装整团（Mac/Windows 通用，无需联网/账号）。团队包已内嵌全部 11 位专家副本，无需逐个安装。
 
 ### 调用
 
@@ -180,6 +191,7 @@ Copy-Item -Recurse gaozhi-course-team "$env:USERPROFILE\.workbuddy\plugins\marke
 
 ### Changelog
 
+- **v1.3.6（2026-09-19）**：**明确通用定位**——README 顶部写明「适用于所有面向职业岗位的课程开发（中职 / 高职专科 / 职业本科 · 全专业大类）」，并给出通用机制「换专业不改团队只换行业库，换学校不改团队只换模板」；新增「适用对象」表与「通用性三层解耦」表（方法论层不变 / 行业知识层可插拔 / 文档格式层以学校模板为真源）；补充启动参数表与「扩展到其他专业」步骤；`plugin.json` 四字段、默认提示语同步通用化。团队能力未变，为**定位与文档层修订**。
 - **v1.3.5（2026-09-19）**：知识库纯 md 化——`knowledge/` 三份政策 PDF（纲要 / 1号文 / 从岗位到课堂）全部转写为 md 并移除原件，日常检索/引用统一走 md，无二进制依赖；`README.md` 更新时间同步。
 - **v1.3.4（2026-08-20）**：⑧ 号成员 **Ti08 模板导出专家** 把"单元教案导出逻辑"从单课程项目脚本提升为**技能级通用通道**（`ti-office-docs/scripts/unit-lesson-plan/`：engine.py 段落引擎 + unit_channel.py 运行器 + 单元教案-fieldmap.json 模板映射），与课程解耦；`verify_faith.py` 段落校验改为"签名子集"判定；明确 S07→Ux 路由触发。
 - **v1.3.3（2026-08-20）**：⑧ 号成员 **office-docs 改名「Ti08 模板导出专家」**。核心转变：以用户/默认模板为唯一格式真源，**格式零改动、只替换内容**；默认输出模板固化为**三件套**（课程标准/授课计划/单元教案）；新增模板规范化门与保真核对。
