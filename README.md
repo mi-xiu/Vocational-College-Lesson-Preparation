@@ -1,4 +1,4 @@
-# 高职课程开发专家团 · gaohi-course-team
+# 高职课程开发专家团 · gaozhi-course-team
 
 > **版本 v1.3.5** ｜ 类型：Team 型多角色协作专家团队 ｜ 作者：米修老师（mixstudio@qq.com）
 > 适用平台：WorkBuddy 桌面版（专家注册于 `my-experts` marketplace）
@@ -104,11 +104,11 @@ gaozhi-course-team/
 ### 方式 A · 放入 WorkBuddy 专家目录（推荐开发者）
 
 ```bash
-git clone <本仓库地址> gaohi-course-team
+git clone <本仓库地址> gaozhi-course-team
 # macOS / Linux
-cp -r gaohi-course-team ~/.workbuddy/plugins/marketplaces/my-experts/plugins/
+cp -r gaozhi-course-team ~/.workbuddy/plugins/marketplaces/my-experts/plugins/
 # Windows（PowerShell）
-Copy-Item -Recurse gaohi-course-team "$env:USERPROFILE\.workbuddy\plugins\marketplaces\my-experts\plugins\"
+Copy-Item -Recurse gaozhi-course-team "$env:USERPROFILE\.workbuddy\plugins\marketplaces\my-experts\plugins\"
 ```
 
 放入后重启 WorkBuddy，在「专家」入口即可看到 **高职课程开发专家团（v1.3.5·含教学平台）**。
