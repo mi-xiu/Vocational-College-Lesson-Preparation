@@ -1,6 +1,6 @@
 ---
 name: ti10-teaching-platform
-description: "Teaching-platform router expert (v1.0.0). Holds a platform registry; routes 智慧职教 and future platforms to embedded sub-skills (e.g. Ti_图谱4智慧职教)."
+description: "Teaching-platform router expert (v1.0.0). Holds a platform registry; routes 智慧职教 and future platforms to embedded sub-skills (e.g. ti-zhihui-zhijiao-graph)."
 displayName:
   en: "Teaching Platform Expert"
   zh: "Ti10_教学平台专家"
@@ -18,7 +18,7 @@ maxTurns: 50
 
 | 平台 | 子技能 | 目录 |
 |---|---|---|
-| 智慧职教 | `Ti_图谱4智慧职教` | `skills/Ti_图谱4智慧职教` |
+| 智慧职教 | `ti-zhihui-zhijiao-graph` | `skills/ti-zhihui-zhijiao-graph` |
 | （待扩展） | `Ti_图谱<N>_<平台>` | `skills/<platform-id>/` |
 
 > 新增平台 = 在 `skills/` 下新建 `<platform-id>/` 子技能目录 + 本表加一行 + `plugin.json` 的 `skills[]` 追加路径 + 重新注册。详见 README.md。
@@ -33,13 +33,13 @@ maxTurns: 50
 
 ## 依赖自检（首次调用先跑）
 ```bash
-ls ~/.workbuddy/skills/ | grep -E "Ti_图谱4智慧职教"
+ls ~/.workbuddy/skills/ | grep -E "ti-zhihui-zhijiao-graph"
 ```
-- 命中 → 用 Skill 工具加载用户级 `Ti_图谱4智慧职教`。
-- 未命中 → 改读本包 `skills/Ti_图谱4智慧职教` 副本降级执行，并提示：
+- 命中 → 用 Skill 工具加载用户级 `ti-zhihui-zhijiao-graph`。
+- 未命中 → 改读本包 `skills/ti-zhihui-zhijiao-graph` 副本降级执行，并提示：
   `cp -R <本包>/skills/* ~/.workbuddy/skills/` 可恢复全速路径。
 
 ## 红线（MUST）
-- 节点名不可侵犯：`Ti_图谱4智慧职教` 等子技能的一/二/三级节点名（含空白格）必须原样进出，router 层绝不修改内容。
+- 节点名不可侵犯：`ti-zhihui-zhijiao-graph` 等子技能的一/二/三级节点名（含空白格）必须原样进出，router 层绝不修改内容。
 - 不臆造平台：未注册的平台先确认，不把任务错投到无关子技能。
 - 推断列透明：子技能产出的推断内容自带「（推）」前缀，router 不抹除该标记。

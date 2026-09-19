@@ -1,6 +1,6 @@
 {
-  "template": "单元教案-模板.docx",
-  "desc": "默认单元教案模板（西点装饰工艺版·纯段落）段落映射。索引取自 templates/单元教案-模板-spec.json，对当前模板文件稳定。本映射只描述模板级结构（哪段放什么字段），课程内容由调用方以 unit 字典提供，课程专属清扫替换由调用方以 sweep 列表提供——引擎不绑定任何课程。",
+  "template": "unit-lesson-plan-template.docx",
+  "desc": "默认单元教案模板（西点装饰工艺版·纯段落）段落映射。索引取自 templates/unit-lesson-plan-template-spec.json，对当前模板文件稳定。本映射只描述模板级结构（哪段放什么字段），课程内容由调用方以 unit 字典提供，课程专属清扫替换由调用方以 sweep 列表提供——引擎不绑定任何课程。",
   "rpr": {
     "bold_idx": 29,
     "norm_idx": 30,

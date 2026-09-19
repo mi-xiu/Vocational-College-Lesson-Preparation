@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""创建高职课程建设工作区骨架（对齐 K02 权威结构：00–08 + 99）。
+"""创建职教课程建设工作区骨架（对齐 K02 权威结构：00–08 + 99）。
 
 替代旧版「扁平 01–09 草案」骨架。
 
@@ -13,7 +13,7 @@
         --weeks 14
 
 设计原则：
-  1) 结构对齐高职课程建设标准目录（四阶段 00–08 + 99）。
+  1) 结构对齐职教课程建设标准目录（四阶段 00–08 + 99）。
   2) 幂等且安全：目录 exist_ok；文件默认 **不覆盖**（呼应"回退不删原文件"纪律），
      需覆盖时显式传 --overwrite。可反复重跑补齐缺失目录。
   3) 只建骨架 + 轻量占位，正文由 S01–S09 逐步经审批门填充。
@@ -218,11 +218,11 @@ def build_placeholders(dirs: dict, course_name: str, direction: str,
     write_md(d07 / "运维改进规划与模板.md", f"{course_name} · S09 运维改进规划与模板",
              meta + "\n待 S09 填充：数据回流口径 / 反馈收集 / 版本迭代记录 / 建设总结（PDCA）。\n", overwrite)
 
-    write_md(dirs["00_参考资料"] / "说明.md", f"{course_name} · 00 参考资料",
+    write_md(dirs["00_参考资料"] / "NOTES.md", f"{course_name} · 00 参考资料",
              meta + "\n存放：平台指南 / 行业标准 / 备课教程等跨步骤参考材料（与 02 教学资源同为共享性质）。\n", overwrite)
-    write_md(dirs["08_申报与成果"] / "说明.md", f"{course_name} · 08 申报与成果",
+    write_md(dirs["08_申报与成果"] / "NOTES.md", f"{course_name} · 08 申报与成果",
              meta + "\n存放：精品课申报书 / 获奖材料 / 论文 / `历史版本/` 归档。\n", overwrite)
-    write_md(dirs["99_工程与脚本"] / "说明.md", f"{course_name} · 99 工程与脚本",
+    write_md(dirs["99_工程与脚本"] / "NOTES.md", f"{course_name} · 99 工程与脚本",
              meta + "\n存放：一次性生成脚本、批处理工具（归档用，不参与教学交付）。\n", overwrite)
 
 
@@ -234,7 +234,7 @@ def build_packages(dirs: dict, course_name: str, sample_weeks: int, overwrite: b
         mkdir(pkg)
         for sub in PKG_SUBDIRS:
             mkdir(pkg / sub)
-        write_md(pkg / "00_本包说明" / "本包说明.md",
+        write_md(pkg / "00_本包说明" / "本包NOTES.md",
                  f"{course_name} · 备课包 第 {week} 周 · 本包说明",
                  "> 本包为 S07 定稿前的占位模板；确定周主题后，请把本目录重命名为\n"
                  f"> `备课包_第{week}周_作品X_具体主题`，与 `04_单元教学设计/单元设计_第{week}周_…` 逐字对应。\n\n"
@@ -289,7 +289,7 @@ def build_root_docs(course_root: Path, course_name: str, direction: str,
     tree = tree_text(annotate)
 
     write_md(course_root / "README.md", f"{course_name} 课程建设工作区",
-             f"> 方向：{direction}　周数：{weeks}　方法论：高职课程建设九步法 S01–S09（S08 展开 10 子步 = 18 步）\n\n"
+             f"> 方向：{direction}　周数：{weeks}　方法论：职教课程建设九步法 S01–S09（S08 展开 10 子步 = 18 步）\n\n"
              f"## 目录结构\n\n{tree}\n\n"
              "## 建设纪律\n\n"
              "1. 顺序铁律：S02 典型任务 在 S04 课标之前；S05 学生画像 在 S06 整体设计之前；周进程属 S06，不进课标。\n"
@@ -300,7 +300,7 @@ def build_root_docs(course_root: Path, course_name: str, direction: str,
              "   进度以 `课程建设进度状态表.md` 为唯一事实源。\n", overwrite)
 
     write_md(course_root / "目录结构清单.md", f"{course_name} · 目录结构清单（当前生效版）",
-             f"> 对齐：高职课程建设九步法（S01–S09）+ 四阶段理论\n"
+             f"> 对齐：职教课程建设九步法（S01–S09）+ 四阶段理论\n"
              f"> 命名纪律：课程标准 ≠ 课程整体设计（两层分离，不混用）；一级目录 `两位数字_中文`；不使用「特定证书体系」表述。\n\n"
              f"## 顶层目录（00–08 + 99，连续编号）\n\n{tree}\n\n"
              "## 九步法 → 目录映射\n\n"
@@ -392,7 +392,7 @@ def create(root: str, course_name: str, direction: str, code: str, weeks: int,
 
 def main() -> None:
     p = argparse.ArgumentParser(
-        description="创建高职课程建设工作区骨架（00–08 + 99，对齐 K02 权威结构）")
+        description="创建职教课程建设工作区骨架（00–08 + 99，对齐 K02 权威结构）")
     p.add_argument("--root", required=True, help="课程文件夹存放的父目录，如 ~/WorkBuddy")
     p.add_argument("--course-name", required=True, help="课程名称，如 某专业核心课")
     p.add_argument("--direction", required=True, help="课程方向关键词，如 短视频·微短剧")

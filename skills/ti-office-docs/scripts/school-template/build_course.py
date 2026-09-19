@@ -31,7 +31,7 @@ def make_docs(idt):
     return [
         {
             "name": "课程标准",
-            "spec": "课程标准-模板-spec.json",
+            "spec": "course-standard-template-spec.json",
             "data": "课程标准-%s-data.json" % idt["course_name"],
             "out": "课程标准-%s.docx" % idt["course_name"],
             "overlay": {
@@ -47,7 +47,7 @@ def make_docs(idt):
         },
         {
             "name": "授课计划",
-            "spec": "授课计划-模板-spec.json",
+            "spec": "teaching-plan-template-spec.json",
             "data": "授课计划-%s-data.json" % idt["course_name"],
             "out": "授课计划-%s.docx" % idt["course_name"],
             "overlay": {
@@ -64,7 +64,7 @@ def make_docs(idt):
         },
         {
             "name": "单元教案",
-            "spec": "单元教案-模板-spec.json",
+            "spec": "unit-lesson-plan-template-spec.json",
             "data": "单元教案-%s-data.json" % idt["course_name"],
             "out": "单元教案-%s.docx" % idt["course_name"],
             "overlay": {

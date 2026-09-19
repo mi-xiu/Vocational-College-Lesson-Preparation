@@ -14,9 +14,9 @@
 
 ```
 <项目>/
-├── 课程标准-模板.docx           # 学校官方模板（源，永不改）
-├── 授课计划-模板.docx
-├── 单元教案-模板.docx
+├── course-standard-template.docx           # 学校官方模板（源，永不改）
+├── teaching-plan-template.docx
+├── unit-lesson-plan-template.docx
 ├── _spec/                       # 管线工作区
 │   ├── optimize_template.py     # 优化器
 │   ├── render_template.py       # 渲染器
@@ -38,9 +38,9 @@
 
 ### 阶段 A · 优化（每模板一次性）
 ```bash
-python optimize_template.py 课程标准-模板.docx   # → 课程标准-模板-spec.json
-python optimize_template.py 授课计划-模板.docx   # → 授课计划-模板-spec.json
-python optimize_template.py 单元教案-模板.docx   # → 单元教案-模板-spec.json
+python optimize_template.py course-standard-template.docx   # → course-standard-template-spec.json
+python optimize_template.py teaching-plan-template.docx   # → teaching-plan-template-spec.json
+python optimize_template.py unit-lesson-plan-template.docx   # → unit-lesson-plan-template-spec.json
 ```
 产出 `*-spec.json`：段落整段 match 键、表格 `mode`（fill/rebuild/cells）+ `merge_cols` + `col_widths` + 表头 + 合计行，并内嵌 `verify` 段（forbidden/expect）与 `rules` 段（校正规则）。
 
@@ -88,4 +88,4 @@ office-docs 是专家团文档统一出口。内容专家（course-standard / bl
 
 ## 6. 版本
 
-本管线随 `ti-office-docs` 技能 v1.1.0 并入 `gzv-office-docs` 专家（包 v1.3.1）与 `gaozhi-course-team` 专家团（包 v1.3.1）。
+本管线随 `ti-office-docs` 技能 v1.1.0 并入 `gzv-office-docs` 专家（包 v1.3.1）与 `vocational-college-lesson-preparation` 专家团（包 v1.3.1）。

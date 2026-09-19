@@ -1,7 +1,7 @@
 # 单元教案通道（Ti08 模板导出专家 · 通用导出通道）
 
 > 把"单元教案导出逻辑"从单课程项目脚本（`99_工程与脚本/export_unit.py`）提升为**技能级通用通道**，
-> 与任何具体课程解耦：**模板级结构**在技能内（`单元教案-fieldmap.json`），**课程内容**由调用方提供，
+> 与任何具体课程解耦：**模板级结构**在技能内（`unit-lesson-plan-fieldmap.json`），**课程内容**由调用方提供，
 > **课程专属换皮**由调用方以 sweep 列表提供。新增课程只需提供内容，无需重写导出脚本。
 
 ---
@@ -12,8 +12,8 @@
 |---|---|---|
 | `scripts/unit-lesson-plan/engine.py` | 通用段落引擎原语（pPr+rPr 双继承、删块、清扫、定位） | 否 |
 | `scripts/unit-lesson-plan/unit_channel.py` | 通用运行器 `export_unit / export_units` | 否 |
-| `scripts/unit-lesson-plan/单元教案-fieldmap.json` | 默认单元教案模板的段落映射（索引/章节/关键字定位） | 模板级（否） |
-| `references/模板字段映射.md` | 模板字段 ↔ 项目来源 总映射 | 否 |
+| `scripts/unit-lesson-plan/unit-lesson-plan-fieldmap.json` | 默认单元教案模板的段落映射（索引/章节/关键字定位） | 模板级（否） |
+| `references/template-field-mapping.md` | 模板字段 ↔ 项目来源 总映射 | 否 |
 | 调用方项目脚本（如 `export_unit.py`） | 课程内容 `UNITS` + 身份段 + sweep 列表 | **是** |
 
 > 关键分离：**模板怎么排**（fieldmap）归技能；**教什么**（unit 数据）归课程；
@@ -77,11 +77,11 @@ SWEEP = [("旧模板词", "新课程词"), ...]        # 课程换皮（项目�
 
 for uid, u in UNITS.items():
     unit = dict(u); unit.update(IDENTITY); unit["process_header"] = "四、 教学过程设计（2学时，共90分钟）"
-    UC.export_unit(f"{BASE}/templates/单元教案-模板.docx", UC.load_plan(), unit,
+    UC.export_unit(f"{BASE}/templates/unit-lesson-plan-template.docx", UC.load_plan(), unit,
                    f"word版/XX-单元教案-{uid}.docx", sweep=SWEEP)
 ```
 
-`UC.load_plan()` 默认读取同目录 `单元教案-fieldmap.json`（默认模板映射）。换用其他单元教案模板时，
+`UC.load_plan()` 默认读取同目录 `unit-lesson-plan-fieldmap.json`（默认模板映射）。换用其他单元教案模板时，
 可传入自定义 fieldmap 路径（字段结构一致即可复用引擎）。
 
 ---

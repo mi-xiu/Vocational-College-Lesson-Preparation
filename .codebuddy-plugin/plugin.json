@@ -1,14 +1,14 @@
 {
-  "name": "gaozhi-course-team",
-  "version": "1.3.6",
-  "description": "（v1.3.6）面向职业岗位的职业教育课程开发专家团（专业无关·全大类通用）：11 agents (1 director + 10 members) across 3 phases — post research, competency map, course standard, course audit, overall design, unit design, lesson prep, template export, industry advisor — plus a teaching-platform router (Ti10) that routes deliverables to platform sub-skills (e.g. 智慧职教), orchestrated by a course director holding PGSD/岗课赛证 red lines. 通用性三层解耦：方法论层（PGSD+SOP+红线）不变、行业知识层（knowledge/行业库 可插拔）随专业切换、文档格式层（学校模板为唯一真源）随学校切换——换专业不改团队只换行业库，换学校不改团队只换模板；适用于中职/高职专科/职业本科任意专业大类所有面向职业岗位的课程开发。v1.3.6: README 明确通用定位（适用范围/适用对象/三层解耦/扩展专业/启动参数）；v1.3.5: knowledge/ 三份政策 PDF 全部转写 md 并去 PDF（纲要/1号文/从岗位到课堂），知识库纯 md 化；v1.3.4: Ti08 单元教案导出逻辑提升为技能级通用通道（课程无关）+ verify_faith 段落校验改为签名子集；默认三件套与规范化门/保真核对保持。",
+  "name": "vocational-college-lesson-preparation",
+  "version": "1.4.0",
+  "description": "（v1.4.0）面向职业岗位的职业教育课程开发专家团（专业无关·全大类通用）：11 agents (1 director + 10 members) across 3 phases — post research, competency map, course standard, course audit, overall design, unit design, lesson prep, template export, industry advisor — plus a teaching-platform router (Ti10) that routes deliverables to platform sub-skills (e.g. 智慧职教), orchestrated by a course director holding PGSD/岗课赛证 red lines. 通用性三层解耦：方法论层（PGSD+SOP+红线）不变、行业知识层（knowledge/industry-libs 可插拔）随专业切换、文档格式层（学校模板为唯一真源）随学校切换——换专业不改团队只换 industry-libs ，换学校不改团队只换模板；适用于中职/高职专科/职业本科任意专业大类所有面向职业岗位的课程开发。v1.4.0: README 明确通用定位（适用范围/适用对象/三层解耦/扩展专业/启动参数）；v1.3.5: knowledge/ 三份政策 PDF 全部转写 md 并去 PDF（纲要/1号文/从岗位到课堂），知识库纯 md 化；v1.3.4: Ti08 单元教案导出逻辑提升为技能级通用通道（课程无关）+ verify_faith 段落校验改为签名子集；默认三件套与规范化门/保真核对保持。",
   "author": {
     "name": "米修老师",
     "email": "mixstudio@qq.com",
     "wechat": "aietom"
   },
   "agents": [
-    "./agents/gaozhi-course-team-lead.md",
+    "./agents/vocational-college-lesson-preparation-lead.md",
     "./agents/post-research.md",
     "./agents/competency-map.md",
     "./agents/course-standard.md",
@@ -34,12 +34,12 @@
     "./skills/ti-s09-lesson-prep",
     "./skills/ti-office-docs",
     "./skills/ti-industry-advisor",
-    "./skills/Ti_图谱4智慧职教"
+    "./skills/ti-zhihui-zhijiao-graph"
   ],
   "expertType": "team",
-  "agentName": "gaozhi-course-team-lead",
+  "agentName": "vocational-college-lesson-preparation-lead",
   "teamInfo": {
-    "leadAgent": "gaozhi-course-team-lead",
+    "leadAgent": "vocational-college-lesson-preparation-lead",
     "memberAgents": [
       "post-research",
       "competency-map",
@@ -54,28 +54,28 @@
     ]
   },
   "displayName": {
-    "en": "Vocational Course Dev Team（v1.3.6·All Majors·Platform）",
-    "zh": "高职课程开发专家团（v1.3.6·全专业通用·含教学平台）"
+    "en": "Vocational-College-Lesson-Preparation Team（v1.4.0·All Majors·Platform）",
+    "zh": "职教课程开发专家团（v1.4.0·全专业通用·含教学平台）"
   },
   "profession": {
-    "en": "Vocational Course Dev Team（v1.3.6·All Majors·Platform）",
-    "zh": "高职课程开发专家团（v1.3.6·全专业通用·含教学平台）"
+    "en": "Vocational-College-Lesson-Preparation Team（v1.4.0·All Majors·Platform）",
+    "zh": "职教课程开发专家团（v1.4.0·全专业通用·含教学平台）"
   },
   "displayDescription": {
-    "en": "Vocational course dev team v1.3.6 for ALL majors: 11 specialists across the full PGSD/岗课赛证 workflow, plus a Ti10 teaching-platform router (智慧职教 etc.). Swap major = swap industry lib; swap school = swap template.",
-    "zh": "高职课程开发专家团 v1.3.6：适用于所有面向职业岗位的课程开发（中职/高职/职业本科·全专业大类）；换专业不改团队只换行业库，换学校不改团队只换模板。"
+    "en": "Vocational-College-Lesson-Preparation Team v1.4.0 for ALL majors: 11 specialists across the full PGSD/post-course-competition-cert workflow, plus a Ti10 teaching-platform router (Zhihui Zhijiao etc.). Swap major = swap industry lib; swap school = swap template.",
+    "zh": "职教课程开发专家团 v1.4.0：适用于所有面向职业岗位的课程开发（中职/高职专科/职业本科·全专业大类）；换专业不改团队只换行业库，换学校不改团队只换模板。"
   },
-  "avatar": "avatars/gaozhi-course-team-lead.png",
+  "avatar": "avatars/vocational-college-lesson-preparation-lead.png",
   "categoryId": "09-OperationsHR",
   "defaultInitPrompt": {
-    "zh": "按专家团三阶段流程，帮我从零建设一门面向职业岗位的课程完整交付物（课标/整体设计/单元/备课包）。请先给课程名、专业与层次、学时周次（专业不限，换专业只换行业库，换学校只换模板）。",
+    "zh": "按专家团三阶段流程，帮我从零建设一门面向职业岗位的课程完整交付物（课标/整体设计/单元/备课包）。请先给课程名、专业与层次、学时周次（专业不限，换专业只换 industry-libs ，换学校只换模板）。",
     "en": "Run the 3-phase team workflow to build a complete vocationally-oriented course package from scratch (any major). Give course name, major/level, and credit hours/weeks first."
   },
-  "plugin": "gaozhi-course-team",
+  "plugin": "vocational-college-lesson-preparation",
   "tags": [
     {
-      "en": "Higher-Vocational Course Dev",
-      "zh": "高职课程建设"
+      "en": "Vocational Education Course Dev",
+      "zh": "职教课程建设"
     },
     {
       "en": "Course Standard",
@@ -102,7 +102,7 @@
   ],
   "members": [
     {
-      "id": "gaozhi-course-team-lead",
+      "id": "vocational-college-lesson-preparation-lead",
       "displayName": {
         "en": "Course Director",
         "zh": "Ti00 课程总监"
@@ -111,7 +111,7 @@
         "en": "Course Development Director",
         "zh": "Ti00 课程总监"
       },
-      "avatar": "avatars/gaozhi-course-team-lead.png",
+      "avatar": "avatars/vocational-college-lesson-preparation-lead.png",
       "role": "lead"
     },
     {

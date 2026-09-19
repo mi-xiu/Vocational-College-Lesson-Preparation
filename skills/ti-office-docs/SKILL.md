@@ -1,7 +1,7 @@
 ---
 name: ti-office-docs
 description: >
-  高职课程「模板导出专家」随身技能（原 Office 文档专家，已改名）。默认输出模板 = 三件套
+  职教课程「模板导出专家」随身技能（原 Office 文档专家，已改名）。默认输出模板 = 三件套
   （课程标准/授课计划/单元教案 docx）；工作流：①询问用户有哪些模板可用 → ②从项目 md 母本
   抽取内容 → ③用模板保真套格式（格式不变只换内容，optimize→render 管线）→ ④逐份与模板
   零改动核对（verify_faith）→ ⑤交付归档。模板不规范时先请用户修正至可复刻再接受。
@@ -19,9 +19,9 @@ metadata:
 
 ## 默认模板库（已固化 · 三件套）
 目录 `templates/`：
-- `课程标准-模板.docx` + `课程标准-模板-spec.json`
-- `授课计划-模板.docx` + `授课计划-模板-spec.json`
-- `单元教案-模板.docx` + `单元教案-模板-spec.json`
+- `course-standard-template.docx` + `course-standard-template-spec.json`
+- `teaching-plan-template.docx` + `teaching-plan-template-spec.json`
+- `unit-lesson-plan-template.docx` + `unit-lesson-plan-template-spec.json`
 
 > 这三份即"**默认输出模板**"。任何课程（如《AI短剧编剧》）均套用其格式；用户也可上传/指定
 > 自定义模板替换或补充其中某份。
@@ -44,7 +44,7 @@ metadata:
 
 **第 2 步 · 从项目抽取内容（按映射表）**
 - 内容专家已出 md 母本（课程标准 / 整体设计 / 单元设计 等）。本专家按
-  `references/模板字段映射.md`（模板字段 ↔ 项目来源 ↔ 是否已具备 ↔ 需补充）抽取、重组内容。
+  `references/template-field-mapping.md`（模板字段 ↔ 项目来源 ↔ 是否已具备 ↔ 需补充）抽取、重组内容。
 - 注意：**本项目母本结构与模板八章式骨架不完全对齐**（如《AI短剧编剧》课标为十节式），
   须按映射表做"重映射/重组"，而非直接复制粘贴。
 
@@ -65,7 +65,7 @@ metadata:
 - 记录本次所用模板文件名与版本，便于回环复现。
 
 ## 模板字段 ↔ 项目内容 映射（摘要）
-> 完整版见 `references/模板字段映射.md`（含《AI短剧编剧》逐字段"是否已具备/需补充"标注）。
+> 完整版见 `references/template-field-mapping.md`（含《AI短剧编剧》逐字段"是否已具备/需补充"标注）。
 
 **课程标准模板**（八章式）
 | 模板位置 | 项目来源 |
@@ -133,7 +133,7 @@ metadata:
 |---|---|
 | `scripts/unit-lesson-plan/engine.py` | 通用段落引擎（pPr+rPr 双继承 / 删块 / 清扫 / 定位） |
 | `scripts/unit-lesson-plan/unit_channel.py` | 通用运行器 `export_unit / export_units` |
-| `scripts/unit-lesson-plan/单元教案-fieldmap.json` | 默认单元教案模板的段落映射（模板级，课程无关） |
+| `scripts/unit-lesson-plan/unit-lesson-plan-fieldmap.json` | 默认单元教案模板的段落映射（模板级，课程无关） |
 
 **三正交分离**：模板怎么排（fieldmap，技能内）· 教什么（unit 数据，课程级）· 旧模板换皮（sweep，课程级）。
 新增课程 = 复用 fieldmap + 提供 unit 数据 + 提供 sweep，无需重写导出脚本。
@@ -157,7 +157,7 @@ metadata:
 - 批量：脚本须单文件自包含（沙箱可能拦截本地模块 import）。
 
 ## 待补（生成前需用户/项目确认的内容）
-见 `references/模板字段映射.md` 的"需补充"列。典型缺口：
+见 `references/template-field-mapping.md` 的"需补充"列。典型缺口：
 - 授课教师姓名、具体授课班级、编制日期、课程标准版本号、课程代码（教务分配）。
 - 授课计划 TABLE0 的"讲课/练习/实验/复习/考试/测验/实习/其它"学时拆分。
 - 课程标准 TABLE3 评价样表（配分合计=100）。

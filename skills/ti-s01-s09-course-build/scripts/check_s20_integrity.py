@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # S20 对齐产物全面核查脚本（只读，不改动任何文件）
-# 通用版：针对任意高职课程的 S20 模板对齐产物固化；通过 --base 与 --course-name 适配不同课程。
+# 通用版：针对任意职教课程的 S20 模板对齐产物固化；通过 --base 与 --course-name 适配不同课程。
 # 用法：python3 scripts/check_s20_integrity.py --base /path/to/课程根 --course-name <课程名>
 import os, re, argparse
 from docx import Document

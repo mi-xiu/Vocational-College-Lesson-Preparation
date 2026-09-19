@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-package_team.py —— 高职课程开发专家团「打包功能」
+package_team.py —— 职教课程开发专家团「打包功能」
 
 把专家团队包（agents / skills / templates / avatars / knowledge / 文档）
 打成带语义版本号的可分享压缩包，并附等价的 .wbp 离线安装副本，同时打印清单。
@@ -128,7 +128,7 @@ def build(expert_dir, out_dir, make_wbp):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="高职课程开发专家团打包功能")
+    ap = argparse.ArgumentParser(description="职教课程开发专家团打包功能")
     ap.add_argument("expert_dir", help="团队包根目录（含 .codebuddy-plugin/plugin.json）")
     ap.add_argument("--out-dir", default=None, help="输出目录，默认团队包同级「专家团分享包/」")
     ap.add_argument("--no-wbp", action="store_true", help="不生成 .wbp 离线安装副本")

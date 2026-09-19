@@ -1,0 +1,99 @@
+# 专家团版本号管理办法
+
+> 适用范围：`vocational-college-lesson-preparation` 团队包及其 10 个独立 `gzv-*` 专家包。
+> 生效：2026-08-12，小虎确立「按发布范围定版本级别」原则后首次落地。
+
+---
+
+## 1. 版本号格式
+
+语义化版本 `X.Y.Z`（主.次.修订），三类含义：
+
+| 位 | 名称 | 含义 |
+|---|---|---|
+| X | 主版本 | 破坏性变更：专家职责/对外接口/红线重大调整、专家团结构根本性变化 |
+| Y | 次版本 | 向后兼容的新能力：全体专家统一发版时 +1 |
+| Z | 修订号 | 补丁级修正：单专家或局部变动 +1 |
+
+---
+
+## 2. 升级判级规则（核心：**按发布范围，不按功能大小**）
+
+版本 bump 的级别取决于**本次发布覆盖的专家/包范围**，与功能体量无关。
+
+| 场景 | 受影响包 | 版本动作 |
+|---|---|---|
+| 仅单个专家/技能内部改动（如修脚本、加文档、优化管线） | 该 `gzv-*` 包 | `Z+1`（修订） |
+| 单专家改动波及团队包内的嵌入副本 | 该 `gzv-*` 包 **+** `vocational-college-lesson-preparation` 团队包 | 两者均 `Z+1`；**不升 Y**（非全体发布） |
+| **全体专家统一发版**（如 2026-08-10 那次 10 包齐发） | 全部 `gzv-*` 包 **+** 团队包 | 统一 `Y+1`，全体同号 |
+| 破坏性/红线重大变更 | 相关包 | `X+1`，并同步升级受影响下游 |
+
+**反例（本次纠正）**：2026-08-12 仅 `gzv-office-docs` 并入 S04 学校模板管线（属单专家补丁级能力增强），
+若按「功能大小」会误升 `Y`（1.3.0→1.4.0）；按「发布范围」应为 `Z+1`（**1.3.0→1.3.1**）。
+故本次团队包与 office-docs 包一并定为 **v1.3.1**，其余 9 个独立专家包保持 **v1.3.0** 不变。
+
+---
+
+## 3. 四字段带版本号纪律（既有规则固化）
+
+专家卡片标题/简介读的是以下 4 处字段，必须**带且一致** `（vX.Y.Z）`：
+
+**agent 型（`gzv-*` 独立包）**
+- `plugin.json`：`displayName` / `profession` / `description`
+- `agents/<pkg>.md` frontmatter：`displayName` / `profession`
+
+**team 型（`vocational-college-lesson-preparation`）**
+- `plugin.json`：`displayName` / `profession`（团队整体）
+- `plugin.json` → `members[]` 中对应成员的 `displayName` / `profession`
+
+> 注意：团队卡片标题读 `plugin.json` 的 team `displayName`；独立专家卡片读 `agents/<pkg>.md` 的 frontmatter `displayName`（**只读这里，改 plugin.json 的 displayName 对独立卡片无效**）。
+
+**技能内部版本独立**：`skills/<skill>/SKILL.md` 的 `metadata.version`（如 `ti-office-docs` 为 `1.1.0`）随技能自身演进，**不强制与包版本同号**；文档引用技能版本时须写准，勿混用包版本号。
+
+---
+
+## 4. 嵌入副本一致性
+
+团队包内的 `skills/<skill>/` 是独立包的**嵌入副本**，必须经由脚手架同步，禁止手改两份：
+
+```
+python3 <scaffold>/scripts/embed_skills.py \
+  --pkg vocational-college-lesson-preparation \
+  --skill-root <独立包>/skills \
+  --skills ti-office-docs
+```
+
+独立包改完 → 跑 `embed_skills.py` 同步 → **再**按第 2 节 bump 版本 → validate + register。
+
+---
+
+## 5. 标准操作流程（每次发版）
+
+1. 改独立包内容（脚本/文档/SKILL.md），必要时 bump 技能内部 `metadata.version`。
+2. `embed_skills.py` 把变更同步进团队包内对应技能副本。
+3. 按第 2 节判定发布范围，bump 版本号（四字段一致）。
+4. `validate_expert.py` 校验两包全绿 → `register_expert.py` 注册（刷新 marketplace.json）。
+5. 在本文档第 6 节 Changelog 追加一条记录。
+
+---
+
+## 6. Changelog
+
+| 日期 | 范围 | 包 | 旧 → 新 | 变更摘要 |
+|---|---|---|---|---|
+| 2026-09-19 | 全体(品牌与标识：目录名/插件 ID/agent 与头像名/文件名 ASCII 化/正文品牌词) | `vocational-college-lesson-preparation`（含全部 agents/skills/templates/knowledge） | 1.3.6 → **1.4.0** | **品牌与标识统一更名**：中文名「高职课程开发专家团」→「职教课程开发专家团」；插件 ID 与目录名 `gaozhi-course-team` → `vocational-college-lesson-preparation`（与 GitHub 仓库同名）；lead agent `vocational-college-lesson-preparation-lead.md` 与同名头像同步改名；仓库内 59 个文件/目录由中文名改为 ASCII 名（`knowledge/A01-authority-docs`、`A02-expert-materials`、`industry-libs`、`templates/default-output-trio`、docx/xlsx 模板、`skills/ti-zhihui-zhijiao-graph`、根目录 `USAGE.md`/`SHARING.md`/`VERSIONING.md`），并同步全部内部引用；正文品牌义「高职」→「职教」，层次义（高职专科/中职/高职院校/高职版）保留；英文 `Higher-Vocational` → `Vocational Education`。按"按发布范围"判级为**全体发版**（Y+1），11 位成员与技能版本随包同号 |
+| 2026-09-19 | 团队包(定位与文档：README + plugin.json 四字段) | `vocational-college-lesson-preparation` | 1.3.5 → **1.3.6** | **通用定位明确化**（定位与文档层修订，团队能力未变）：README 顶部写明「适用于所有面向职业岗位的课程开发（中职/高职专科/职业本科·全专业大类）」并给出通用机制「换专业不改团队只换 industry-libs ，换学校不改团队只换模板」；新增「适用对象」表与「通用性三层解耦」表（方法论层不变 / 行业知识层可插拔 / 文档格式层以学校模板为真源）、启动参数表、「扩展到其他专业」步骤；`plugin.json` version + displayName/profession/displayDescription 四字段、defaultInitPrompt 与 quickPrompts 同步通用化；按\"按发布范围\"判级为团队包单包修订（Z+1），其余 10 位成员与技能版本不变 |
+| 2026-09-19 | 团队包(知识库 knowledge/) | `vocational-college-lesson-preparation`（knowledge/） | 1.3.4 → **1.3.5** | 知识库纯 MD 化：三份政策 PDF（纲要13页扫描件、1号文网页版、从岗位到课堂22页PPT）全部转写为同名 .md 并移除 PDF 原件；md 为日常检索主用版本，含来源说明 + "与课程建设的关联锚点"索引；按"按发布范围"判级为团队包单包修订（Z+1），其余 10 位成员与技能版本不变 |
+| 2026-08-20 | 单专家(office-docs/模板导出专家)+团队包 | `vocational-college-lesson-preparation`（含 `ti-office-docs` 嵌入副本） | 1.3.3 → **1.3.4** | Ti08 单元教案导出逻辑从单课程项目脚本提升为技能级通用"单元教案通道"（`scripts/unit-lesson-plan/`：engine.py 段落引擎 + unit_channel.py 运行器 + unit-lesson-plan-fieldmap.json 模板映射），与课程解耦；`verify_faith.py` 段落校验改为"签名子集"判定（纯段落模板长度随内容可变，不卡段落数量）；SKILL.md metadata.version 升 1.3.0；新增 `references/unit-lesson-plan-channel.md` 并明确 S07→Ux 路由触发；其余成员版本保留 |
+| 2026-08-20 | 单专家(office-docs/模板导出专家)+团队包 | `vocational-college-lesson-preparation`（含 `ti-office-docs` 嵌入副本） | 1.3.2 → **1.3.3** | Ti08 改名「模板导出专家」：以用户/默认模板为唯一格式真源（格式零改动只换内容）； default-output-trio 固化（课程标准/授课计划/单元教案，`templates/default-output-trio/`）；新增模板规范化门与保真核对；导出管线修复（合并表保真重建、新段落继承 pPr+rPr）；新增 `references/template-field-mapping.md`；其余 10 位成员保持原版本 |
+| 2026-08（日期待补） | 全体(成员扩展) | `vocational-college-lesson-preparation` | 1.3.1 → **1.3.2** | 新增 ⑩ 号成员 ti10-teaching-platform（台对接·教学平台路由专家），负责把课程成果路由到目标平台子技能（当前接入智慧职教，含知识图谱属性填充），作为松耦合的"成果对接维度"接入；其余成员保持原版本（本条为补录，原 Changelog 缺失） |
+| 2026-08-10 | 全体 | 10×`gzv-*` + team | 1.2.x/1.0.3 → **1.3.0** | 10 包统一发版，补建 lead/industry-advisor 独立包，四字段带版本号固化 |
+| 2026-08-12 | 单专家(office-docs)+团队包 | `gzv-office-docs` / `vocational-college-lesson-preparation` | 1.3.0 → **1.3.1** | 并入 S04 学校模板保真管线：optimize/render/verify 三件套 + course.yaml 单一真源 + build_course 编排器 + md_to_course 适配器；其余 9 包保持 1.3.0 |
+
+---
+
+## 7. 红线
+
+- 凡发版必走第 5 节流程，禁止直接手改团队包内嵌入副本。
+- 版本号四字段（独立包 3 + MD 2；团队整体 2 + 成员 2）必须同号，validate 前自查无残留旧号。
+- avatar PNG 二进制中的随机字节序列（如 `eY1.8g`）**不属于版本字段**，不计入、不修改。

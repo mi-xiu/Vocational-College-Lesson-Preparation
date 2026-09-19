@@ -2,7 +2,7 @@
 """单元教案通道 · 通用运行器（模板导出专家 · Ti08）
 
 把"单元教案导出逻辑"从项目脚本提升为技能级通用通道：
-- 模板段落结构（索引 / 章节 / 关键字定位）由 单元教案-fieldmap.json 描述（模板级，课程无关）
+- 模板段落结构（索引 / 章节 / 关键字定位）由 unit-lesson-plan-fieldmap.json 描述（模板级，课程无关）
 - 课程内容（每个单元的目标 / 重难点 / 过程等）由调用方以 unit 字典提供（项目级）
 - 课程专属清扫替换（如 烘焙→短剧）由调用方以 sweep 列表提供（项目级）
 
@@ -15,7 +15,7 @@
 
 用法：
   from unit_channel import export_units, load_plan
-  export_units("单元教案-模板.docx", load_plan(), UNITS, OUT_DIR, sweep=SWEEP)
+  export_units("unit-lesson-plan-template.docx", load_plan(), UNITS, OUT_DIR, sweep=SWEEP)
 详见 references/unit-lesson-plan-channel.md
 """
 import sys, os, json
@@ -29,7 +29,7 @@ from engine import (get_rpr, get_ppr, force_rpr, set_para_text, make_para,
                     make_para_mixed, delete_block_between, sweep_replace,
                     locate_by_keyword, locate_after_heading)
 
-DEFAULT_PLAN_PATH = os.path.join(HERE, "单元教案-fieldmap.json")
+DEFAULT_PLAN_PATH = os.path.join(HERE, "unit-lesson-plan-fieldmap.json")
 
 
 def load_plan(plan_path=None):

@@ -1,22 +1,22 @@
-# 高职课程开发专家团 · 使用说明
+# 职教课程开发专家团 · 使用说明
 
 > 版本：**v1.3.5·含教学平台** ｜ 类型：Team 型多角色协作团队 ｜ 作者：米修老师（mixstudio@qq.com）
 > 适用：WorkBuddy 桌面版（专家注册于 `my-experts` marketplace）
-> 配套文档：`README.md`（概览）、`版本号管理办法.md`（发版纪律）、`scripts/package_team.py`（打包功能）
+> 配套文档：`README.md`（概览）、`VERSIONING.md`（发版纪律）、`scripts/package_team.py`（打包功能）
 
 ---
 
 ## 一、这是什么
 
-「高职课程开发专家团」是一支由 **1 位主理人（课程总监）+ 10 位成员专家** 组成的 AI 协作团队，按 **三阶段 SOP** 把一门高职课程从「空盘」建到「可上课的备课包」。
+「职教课程开发专家团」是一支由 **1 位主理人（课程总监）+ 10 位成员专家** 组成的 AI 协作团队，按 **三阶段 SOP** 把一门职教课程从「空盘」建到「可上课的备课包」。
 
-团队严守高职课程建设的六条红线（见第六节），覆盖从岗位调研、能力图谱、课程标准，到整体设计、单元设计、备课素材，再到 Office 文档统一出稿与教学平台对接的**全流程**。它不是单个聊天机器人，而是一套**有主编排、有纪律、有分工**的课程建设流水线。
+团队严守职教课程建设的六条红线（见第六节），覆盖从岗位调研、能力图谱、课程标准，到整体设计、单元设计、备课素材，再到 Office 文档统一出稿与教学平台对接的**全流程**。它不是单个聊天机器人，而是一套**有主编排、有纪律、有分工**的课程建设流水线。
 
 ### 适用场景（直接可用）
 
 | 你的诉求 | 触发话术示例 |
 |---|---|
-| 从零建设一门高职课的完整交付物 | 「按专家团三阶段流程，帮我从零建设一门高职课的完整交付物（课标/整体设计/单元/备课包）」 |
+| 从零建设一门职教课的完整交付物 | 「按专家团三阶段流程，帮我从零建设一门职教课的完整交付物（课标/整体设计/单元/备课包）」 |
 | 接手一门已开设课程，先做现状诊断 | 「我接手了一门已开设课程，先帮我做课程现状梳理（教材/学情/课时/项目来源/模板）」 |
 | 课程要参赛，按岗课赛证重做课标与整体设计 | 「这门课要参赛，帮我按岗课赛证框架重做课标与整体设计」 |
 | 把建好的课程成果对接到教学平台（如智慧职教） | 「把这门课的知识图谱按智慧职教规范补全并导出」 |
@@ -29,7 +29,7 @@
 
 | 序 | 阶段 | 成员 ID | 名字 | 职责 | 包装技能 |
 |---|---|---|---|---|---|
-| 00 | 编排 | `gaozhi-course-team-lead` | 程督远（课程总监） | 编排调度、守红线、S20 收尾校验 | `ti-s01-s09-course-build` |
+| 00 | 编排 | `vocational-college-lesson-preparation-lead` | 程督远（课程总监） | 编排调度、守红线、S20 收尾校验 | `ti-s01-s09-course-build` |
 | 01 | 一 | `post-research` | 许岗清 | ① 岗位调研（S01） | `ti-s01-course-direction` |
 | 02 | 一 | `competency-map` | 蒲图明 | ② 能力图谱（S02+S03） | `ti-s03-competency-map` + `ti-s02-task-resource` |
 | 03 | 一 | `course-standard` | 柯标严 | ③ 课程标准（S04） | `ti-s04-course-standard` |
@@ -39,7 +39,7 @@
 | 07 | 三 | `lesson-prep` | 贝资备 | ⑦ 备课素材（S09） | `ti-s09-lesson-prep` + `ti-s02-resource-collector` |
 | 08 | 三 | `office-docs` | 卫文档 | ⑧ Office 文档统一出口 | `ti-office-docs` |
 | 09 | 三 | `industry-advisor` | 行顾问 | ⑨ 行业知识顾问 | `ti-industry-advisor` |
-| 10 | 对接 | `ti10-teaching-platform` | 台对接 | ⑩ 教学平台路由（智慧职教等） | `Ti_图谱4智慧职教` |
+| 10 | 对接 | `ti10-teaching-platform` | 台对接 | ⑩ 教学平台路由（智慧职教等） | `ti-zhihui-zhijiao-graph` |
 
 > **MBTI ↔ 角色固定映射**（头像纪律）：lead=ENTJ / post-research=ESTJ / competency-map=INTJ / course-standard=ISTJ / course-audit=ISTP / course-blueprint=ENTP / unit-design=ISFJ / lesson-prep=ESTP。头像统一内置 `avatars/`（512×512），程序化生成、纯人像无文字，遵守红线第 6 条。
 
@@ -86,31 +86,31 @@
 
 ### 04 课程现状梳理专家（S05）
 - **职责**：接手已开设/待改造课程时，做存量盘点与现状诊断——教材适配评估、学情诊断、课时核对（从人才培养方案/课表核学时学分）、教学项目来源盘点、模板符合性检查。
-- **内容**：`ti-s05-course-audit`，附 `references/课程现状诊断提纲.md`、`references/模板符合性检查表.md`。
+- **内容**：`ti-s05-course-audit`，附 `references/course-status-audit-outline.md`、`references/template-compliance-checklist.md`。
 
 ### 05 整体设计专家（S06+S08）
 - **职责**：把课标能力落地为「怎么教」——真实项目载体、作品链与阶段、模块×作品矩阵、周次进程、运营机制、课时分配；定稿后派生**学期授课计划**。
 - **内容**：`ti-s06-course-blueprint` + `ti-s08-teaching-plan`，附 `references/methodology.md`、`references/overall-design-template.md`。
 
 ### 06 单元设计专家（S07）
-- **职责**：基于整体设计周次/任务/作品骨架，用 **BOtPPPS 有效课堂模型 + 梅里尔首要教学原理 + 岗课赛证融通 + 课程思政**，设计高职项目化周单元（默认 180min/4 课时）。
-- **内容**：`ti-s07-unit-design`，附 7 份 references（理论框架、BOtPPPS 指南、动机设计、单课工作流、课程输入指南、高职标准、教学法工具）+ 5 份 assets（布鲁姆动词、Grasps 模板、微课脚本等）。
+- **职责**：基于整体设计周次/任务/作品骨架，用 **BOtPPPS 有效课堂模型 + 梅里尔首要教学原理 + 岗课赛证融通 + 课程思政**，设计职教项目化周单元（默认 180min/4 课时）。
+- **内容**：`ti-s07-unit-design`，附 7 份 references（理论框架、BOtPPPS 指南、动机设计、单课工作流、课程输入指南、职教标准、教学法工具）+ 5 份 assets（布鲁姆动词、Grasps 模板、微课脚本等）。
 
 ### 07 备课素材专家（S09）
 - **职责**：按周/单元组织备课包（工作页/考题/量规/学材/PPT/动画/微课/设备/拓展），对齐 R1–R10 资源编码，产出可交付课堂资源包；缺口时补采教学素材。
 - **内容**：`ti-s09-lesson-prep` + `ti-s02-resource-collector`，附 `references/resource-schema.md`。
 
 ### 08 模板导出专家（v1.3.4·文档出口）
-- **职责**：以用户/默认模板为唯一格式真源，把成员产出的 md 母本**保真转换为可编辑 docx/pptx/xlsx**（格式零改动、只换内容）；维护默认输出三件套（课程标准/授课计划/单元教案 spec）、风格库、生成器脚本、单元教案通用通道、用户模板收集区。
+- **职责**：以用户/默认模板为唯一格式真源，把成员产出的 md 母本**保真转换为可编辑 docx/pptx/xlsx**（格式零改动、只换内容）；维护 default-output-trio （课程标准/授课计划/单元教案 spec）、风格库、生成器脚本、单元教案通用通道、用户模板收集区。
 - **内容**：`ti-office-docs`，含 `references/SPEC_RULES.md`、`references/EXPERT_INTEGRATION.md`、`references/school-template-pipeline.md`、4 个 `spec-examples`（课标/单元/授课计划数据样例）、`scripts/`（md2docx.py、md2pptx_demo.py、school-template 三件套 optimize/render/verify/build/md_to_course）。
 
 ### 09 行业知识顾问（S09 知识供给）
-- **职责**：通用壳，为全流程专家供给专业行业知识（教材解读、案例台账、工艺方法）；默认加载**影视行业库**（`knowledge/行业库/film`）。**纯咨询、不写交付物正文**。
-- **内容**：`ti-industry-advisor` + `knowledge/行业库/`（`README.md`、`_模板/`、`film/`）。
+- **职责**：通用壳，为全流程专家供给专业行业知识（教材解读、案例台账、工艺方法）；默认加载**影视 industry-libs**（`knowledge/industry-libs/film`）。**纯咨询、不写交付物正文**。
+- **内容**：`ti-industry-advisor` + `knowledge/industry-libs/`（`README.md`、`_template/`、`film/`）。
 
 ### 10 教学平台路由专家（对接维度 · v1.3.2 新增）
 - **职责**：把课程成果按目标平台路由到对应平台子技能；当前接入**智慧职教**（含知识图谱 25 列属性填充）。与课程开发主线**松耦合**，作为成果导出/对接维度接入；后续平台经 `skills/<platform-id>/` 接口扩展。
-- **内容**：`ti10-teaching-platform` + `Ti_图谱4智慧职教`（`references/列结构.md`）。
+- **内容**：`ti10-teaching-platform` + `ti-zhihui-zhijiao-graph`（`references/column-structure.md`）。
 
 ---
 
@@ -119,15 +119,15 @@
 ### 4.1 模板库 `templates/`（L0–L3 层级编码）
 | 层级 | 文件 | 说明 |
 |---|---|---|
-| L0 | `L0-01_学校课程管理办法.docx` | 学校课程管理办法 |
-| L1 | `L1-01_人才培养方案模板.docx` / `L1-02_课程代码口径表.docx` / `L1-03_知识图谱导入模板.xlsx` | 人才培养方案 / 课程代码口径 / 知识图谱导入 |
-| L2 | `L2-01_课程标准模板.docx` / `L2-02_课程整体设计模板.docx` / `L2-03_单元设计模板.docx` / `L2-04_授课计划模板.docx` / `L2-05_模块学时分配表.xlsx` | 课标 / 整体设计 / 单元设计 / 授课计划 / 学时分配 |
+| L0 | `L0-01_school-course-management.docx` | 学校课程管理办法 |
+| L1 | `L1-01_talent-cultivation-plan-template.docx` / `L1-02_course-code-spec.docx` / `L1-03_knowledge-graph-import-template.xlsx` | 人才培养方案 / 课程代码口径 / 知识图谱导入 |
+| L2 | `L2-01_course-standard-template.docx` / `L2-02_course-blueprint-template.docx` / `L2-03_unit-design-template.docx` / `L2-04_teaching-plan-template.docx` / `L2-05_module-hours-allocation.xlsx` | 课标 / 整体设计 / 单元设计 / 授课计划 / 学时分配 |
 | L3 | `L3-01_工作页`～`L3-10_评价记录表`（docx/xlsx 共 10 份） | 工作页 / 考题 / 量规 / 学材 / 讲稿 / PPT / 微课脚本 / 动画分镜 / 资源清单 / 评价记录 |
 
 > 命名纪律：学校+专业维度前缀 `{学校}{专业}_{L编码}_`；与课标/整体设计两层分离纪律一致。
 
-### 4.2 知识库 `knowledge/行业库/`
-- `film/`（影视行业库，默认加载）、`_模板/`（行业库扩展模板）、`README.md`（知识库使用说明）。
+### 4.2 知识库 `knowledge/industry-libs/`
+- `film/`（影视 industry-libs ，默认加载）、`_template/`（ industry-libs 扩展模板）、`README.md`（知识库使用说明）。
 
 ### 4.3 头像 `avatars/`
 - 11 张成员头像（512×512，程序化生成、纯人像无文字），按 `plugin.json` 的 `members[].avatar` 关联；团队主图取课程总监头像。
@@ -137,17 +137,17 @@
 ## 五、包内目录结构
 
 ```
-gaozhi-course-team/
+vocational-college-lesson-preparation/
 ├── .codebuddy-plugin/
 │   └── plugin.json              # 团队包元数据（name/version/members/displayName…）
 ├── README.md                    # 概览
-├── 版本号管理办法.md             # 发版纪律（按发布范围定版本级别）
-├── 分享操作指引.md               # 历史分享操作说明
-├── 专家团使用说明.md             # 本文档
+├── VERSIONING.md             # 发版纪律（按发布范围定版本级别）
+├── SHARING.md               # 历史分享操作说明
+├── USAGE.md             # 本文档
 ├── agents/                      # 11 个 agent 定义（lead + 10 成员）
 ├── skills/                      # 14 个包装技能（见第二节）
-├── templates/                   # 默认输出三件套（课程标准/授课计划/单元教案 spec）
-├── knowledge/                   # 共享知识库（纯 md：政策文件/行业库）
+├── templates/                   # default-output-trio （课程标准/授课计划/单元教案 spec）
+├── knowledge/                   # 共享知识库（纯 md：政策文件/industry-libs ）
 ├── avatars/                     # 11 张成员头像
 └── style_lib/                   # 文档风格库
 ```
@@ -170,20 +170,20 @@ gaozhi-course-team/
 ### 步骤 1 · 安装 / 注册
 团队包已置于：
 ```
-~/.workbuddy/plugins/marketplaces/my-experts/plugins/gaozhi-course-team/
+~/.workbuddy/plugins/marketplaces/my-experts/plugins/vocational-college-lesson-preparation/
 ```
 **方式 A · 注册命令（使专家在 WorkBuddy 可见）：**
 ```bash
 python3 <expert-manager>/scripts/register_expert.py \
-  ~/.workbuddy/plugins/marketplaces/my-experts/plugins/gaozhi-course-team \
+  ~/.workbuddy/plugins/marketplaces/my-experts/plugins/vocational-college-lesson-preparation \
   --session-id <你的 session-id>
 ```
-**方式 B · GUI 一键分享安装**：专家中心 →「我的专家」→ 找到「高职课程开发专家团（v1.3.2）」卡片 → 分享/安装。
+**方式 B · GUI 一键分享安装**：专家中心 →「我的专家」→ 找到「职教课程开发专家团（v1.3.2）」卡片 → 分享/安装。
 
 > ⚠️ **铁律：先备份，再分享**。GUI 一键分享可能把你本地源包清成残壳。任何分享/打包前，先备份 `~/.workbuddy/plugins/marketplaces/my-experts/` 整个目录。
 
 ### 步骤 2 · 调用专家团
-在 WorkBuddy 左侧「专家」入口选择 **高职课程开发专家团（v1.3.2·含教学平台）**，直接说出诉求即可（见第一节触发话术）。课程总监会自动按三阶段 SOP 调度成员、守红线、做 S20 校验。
+在 WorkBuddy 左侧「专家」入口选择 **职教课程开发专家团（v1.3.2·含教学平台）**，直接说出诉求即可（见第一节触发话术）。课程总监会自动按三阶段 SOP 调度成员、守红线、做 S20 校验。
 
 ### 步骤 3 · 标准工作流（三选一）
 - **从零建设**：触发「三阶段全流程」→ 阶段一（调研→图谱→课标）→ 阶段二（现状梳理/整体设计）→ 阶段三（单元→备课→文档出稿）→ S20 校验。
@@ -191,7 +191,7 @@ python3 <expert-manager>/scripts/register_expert.py \
 - **参赛重做**：直接派 ③+⑤ 按岗课赛证框架重做课标与整体设计。
 
 ### 步骤 4 · 打包与分享
-团队包以带版本号的压缩包分发（如 `高职课程开发专家团_v1.3.5.zip`，含等价 `.wbp` 离线安装副本）。打包由团队包自带脚本/外部打包流程产出，建议随 GitHub Release 一并发布：
+团队包以带版本号的压缩包分发（如 `职教课程开发专家团_v1.3.5.zip`，含等价 `.wbp` 离线安装副本）。打包由团队包自带脚本/外部打包流程产出，建议随 GitHub Release 一并发布：
 - **GitHub Release**：在仓库 Releases 页发布 `v1.3.5`，将 `.zip`/`.wbp` 作为资产上传，他人可在线获取。
 - **离线分发**：直接把 `.wbp` 发给同事/换机，双击即装整团（团队包已内嵌全部 11 位专家副本，无需单独打每个成员）。
 - **资料库分享**：将 zip 上传至 WorkBuddy 资料库，他人可在线安装。
@@ -200,7 +200,7 @@ python3 <expert-manager>/scripts/register_expert.py \
 - 版本号 `X.Y.Z`：**X** 破坏性变更 / **Y** 全体统一发版 / **Z** 单专家或局部补丁。
 - **判级按发布范围，不按功能大小**：仅单专家改动 → `Z+1`；全体齐发 → `Y+1`；红线重大变更 → `X+1`。
 - 四字段（团队整体 + 各成员 `displayName`/`profession`）必须同号；发版前自查无残留旧号。
-- 详情见包内《版本号管理办法.md》。
+- 详情见包内《VERSIONING.md》。
 
 ---
 
@@ -208,5 +208,5 @@ python3 <expert-manager>/scripts/register_expert.py \
 
 - **AI 不替代专业判断**：专家团产出为结构化草案，关键能力点、赛证口径、学校模板适配需教师终校。
 - **学校模板优先**：当学校官方模板与团队模板冲突时，以学校模板为准（量规红线第 5 条例外）。
-- **语言与命名**：全程高职课程建设语境；文件名、能力编号、模块命名严格遵循第三节/第六节纪律，避免混写。
+- **语言与命名**：全程职教课程建设语境；文件名、能力编号、模块命名严格遵循第三节/第六节纪律，避免混写。
 - **二次开发**：可基于本包增减成员/技能；改动后跑 `package_team.py` 重新打包，并按版本纪律 bump 版本号。
